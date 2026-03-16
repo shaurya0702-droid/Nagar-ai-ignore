@@ -1,6 +1,6 @@
 # नागरAI NagarAI — AI Municipal Decision Intelligence Platform
 
-> **Smart India Hackathon 2025** | Ministry of Urban Affairs, Government of India
+> | Ministry of Urban Affairs, Government of India
 
 ---
 
