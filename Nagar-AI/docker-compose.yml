@@ -1,0 +1,84 @@
+version: "3.9"
+ 
+# ═══════════════════════════════════════════════════════════════════════════
+#  NagarAI — Docker Compose (Production)
+# ═══════════════════════════════════════════════════════════════════════════
+ 
+services:
+ 
+  # ─── PostgreSQL ───────────────────────────────────────────────────────────
+  postgres:
+    image: postgres:15-alpine
+    container_name: nagarai-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB:       nagarai_db
+      POSTGRES_USER:     nagarai_user
+      POSTGRES_PASSWORD: nagarai_pass
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U nagarai_user -d nagarai_db"]
+      interval: 10s
+      timeout:  5s
+      retries:  5
+      start_period: 10s
+    networks:
+      - nagarai-net
+ 
+  # ─── FastAPI Backend ──────────────────────────────────────────────────────
+  backend:
+    build:
+      context:    ./backend
+      dockerfile: Dockerfile
+    container_name: nagarai-backend
+    restart: unless-stopped
+    command: uvicorn app.server:app --host 0.0.0.0 --port 8000 --workers 1
+    environment:
+      DATABASE_URL:                postgresql://nagarai_user:nagarai_pass@postgres:5432/nagarai_db
+      SECRET_KEY:                  nagarai-secret-key-2025-sih-production
+      ALGORITHM:                   HS256
+      ACCESS_TOKEN_EXPIRE_MINUTES: 60
+      DEBUG:                       "false"
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - nagarai-net
+    # FIX: python:3.11-slim has no curl — use python urllib instead
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import urllib.request; urllib.request.urlopen('http://localhost:8000/health')\" || exit 1"]
+      interval: 15s
+      timeout:  10s
+      retries:  5
+      start_period: 30s
+ 
+  # ─── Nginx + Frontend ─────────────────────────────────────────────────────
+  frontend:
+    build:
+      context:    ./frontend
+      dockerfile: Dockerfile
+    container_name: nagarai-frontend
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    # FIX: use 'service_started' not 'service_healthy' so frontend
+    # doesn't get blocked waiting for backend healthcheck
+    depends_on:
+      - backend
+    networks:
+      - nagarai-net
+ 
+# ─── Networks ─────────────────────────────────────────────────────────────
+networks:
+  nagarai-net:
+    driver: bridge
+ 
+# ─── Volumes ──────────────────────────────────────────────────────────────
+volumes:
+  postgres_data:
+    driver: local

@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NagarAI — Delhi Municipal Intelligence Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <!-- Leaflet CSS loaded inline when heatmap tab is active -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <style>
+    .toggle-switch { position:relative;display:inline-block;width:48px;height:26px; }
+    .toggle-switch input { opacity:0;width:0;height:0; }
+    .toggle-slider { position:absolute;cursor:pointer;inset:0;background:#334155;border-radius:100px;transition:0.3s; }
+    .toggle-slider::before { content:'';position:absolute;height:18px;width:18px;left:4px;bottom:4px;background:#fff;border-radius:50%;transition:0.3s; }
+    input:checked + .toggle-slider { background:var(--red-critical); }
+    input:checked + .toggle-slider::before { transform:translateX(22px); }
+    .charts-2x3 { display:grid;grid-template-columns:1fr 1fr;gap:20px; }
+    .setting-row { display:flex;justify-content:space-between;align-items:center;padding:16px 0;border-bottom:1px solid var(--border-subtle); }
+    .setting-row:last-child { border-bottom:none; }
+    .setting-label { font-size:14px;font-weight:600;color:var(--text-primary); }
+    .setting-sublabel { font-size:12px;color:var(--text-muted);margin-top:3px; }
+  </style>
+</head>
+<body class="dashboard-body">
+
+<!-- Emergency Banner (fixed top) -->
+<div class="emergency-banner" id="emergency-banner"></div>
+
+<!-- ═══ SIDEBAR ════════════════════════════════════════════════════════════ -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-brand">
+    <span class="hindi">नागरAI</span>
+    <span class="english">NagarAI Command Center</span>
+  </div>
+
+  <div class="sidebar-officer">
+    <div class="officer-avatar">👮</div>
+    <div>
+      <div class="officer-name" id="officer-name">Loading…</div>
+      <div class="officer-role" id="officer-role">OFFICER</div>
+    </div>
+  </div>
+
+  <div class="emergency-mode-pill" id="emergency-mode-pill">🚨 EMERGENCY MODE ON</div>
+
+  <nav class="sidebar-nav">
+    <div class="sidebar-section-label">Main</div>
+    <div class="sidebar-nav-item active" data-tab="overview">
+      <span class="nav-icon">📊</span> Command Overview
+    </div>
+    <div class="sidebar-nav-item" data-tab="complaints">
+      <span class="nav-icon">🗂️</span> सुरक्षित Complaints
+    </div>
+    <div class="sidebar-nav-item" data-tab="analytics">
+      <span class="nav-icon">📈</span> प्राथमिक Analytics
+    </div>
+
+    <div class="sidebar-section-label">Intelligence</div>
+    <div class="sidebar-nav-item" data-tab="heatmap">
+      <span class="nav-icon">🗺️</span> निरीक्षण Heatmap
+    </div>
+    <div class="sidebar-nav-item" data-tab="intelligence">
+      <span class="nav-icon">🧭</span> City Intelligence
+    </div>
+
+    <div class="sidebar-section-label">System</div>
+    <div class="sidebar-nav-item" data-tab="settings">
+      <span class="nav-icon">⚙️</span> Settings
+    </div>
+  </nav>
+
+  <div class="sidebar-footer">
+    <button class="btn btn-danger btn-sm" onclick="logout()" style="width:100%;justify-content:center;">
+      🚪 Logout
+    </button>
+    <div style="text-align:center;font-size:10px;color:var(--text-muted);margin-top:10px;">NagarAI</div>
+  </div>
+</aside>
+
+<!-- ═══ MAIN CONTENT ════════════════════════════════════════════════════════ -->
+<main class="dashboard-main">
+
+  <!-- Topbar -->
+  <div class="dashboard-topbar">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <button id="sidebar-toggle" style="display:none;background:none;color:var(--text-secondary);font-size:20px;padding:6px;">☰</button>
+      <span class="dashboard-topbar-title" id="panel-title">📊 Command Overview</span>
+    </div>
+    <div class="topbar-actions">
+      <div class="system-time" id="system-time">--:--:--</div>
+      <a href="complaint.html" class="btn btn-ghost btn-sm">📋 File Complaint</a>
+      <a href="transparency.html" class="btn btn-ghost btn-sm">📊 Transparency</a>
+    </div>
+  </div>
+
+  <!-- ─────────────────────────────────────────────────────────────────────
+       PANEL: OVERVIEW
+       ───────────────────────────────────────────────────────────────────── -->
+  <div class="dashboard-panel active" id="panel-overview">
+
+    <!-- Spike Alert -->
+    <div class="spike-alert" id="spike-alert"></div>
+
+    <!-- City Incident Intelligence — doc §22 container ID -->
+    <div id="incident-alert-container"></div>
+
+    <!-- City Incident Intelligence Panel (alias ID for backward compat) -->
+    <div id="incident-clusters-panel"></div>
+
+    <!-- 6 Stats Cards -->
+    <div class="stats-cards-row">
+      <div class="stat-card-sm total">  <div class="num" id="stat-total">—</div>  <div class="lbl">Total</div></div>
+      <div class="stat-card-sm critical"><div class="num" id="stat-critical">—</div><div class="lbl">Critical</div></div>
+      <div class="stat-card-sm high">   <div class="num" id="stat-high">—</div>   <div class="lbl">High</div></div>
+      <div class="stat-card-sm medium"> <div class="num" id="stat-medium">—</div> <div class="lbl">Medium</div></div>
+      <div class="stat-card-sm low">    <div class="num" id="stat-low">—</div>    <div class="lbl">Low</div></div>
+      <div class="stat-card-sm sla">    <div class="num" id="stat-sla">—</div>    <div class="lbl">SLA Breached</div></div>
+    </div>
+
+    <!-- Charts Row -->
+    <div class="charts-row" style="margin-bottom:20px;">
+      <div class="chart-container">
+        <div class="card-header"><span class="card-title">Complaints by Ward</span></div>
+        <canvas id="ov-ward-chart"></canvas>
+      </div>
+      <div class="chart-container">
+        <div class="card-header"><span class="card-title">7-Day Trend</span></div>
+        <canvas id="ov-trend-chart"></canvas>
+      </div>
+    </div>
+
+    <!-- Priority Doughnut + City Recommendation -->
+    <div class="charts-row" style="margin-bottom:20px;">
+      <div class="chart-container">
+        <div class="card-header"><span class="card-title">Priority Distribution</span></div>
+        <canvas id="ov-priority-chart"></canvas>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:16px;">
+        <!-- City AI Recommendation Panel -->
+        <div id="city-rec-panel"></div>
+      </div>
+    </div>
+
+    <!-- City AI Recommendation Panel — rendered by renderCityRecommendation() -->
+    <div id="city-recommendation-panel"></div>
+
+    <!-- SLA Breaches -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">🚨 SLA Breaches</span>
+        <span class="badge badge-sla" id="sla-breach-count"></span>
+      </div>
+      <div class="sla-list" id="sla-breach-list"></div>
+    </div>
+
+  </div><!-- /panel-overview -->
+
+  <!-- ─────────────────────────────────────────────────────────────────────
+       PANEL: COMPLAINTS
+       ───────────────────────────────────────────────────────────────────── -->
+  <div class="dashboard-panel" id="panel-complaints">
+
+    <div class="card" style="margin-bottom:20px;">
+      <div class="card-header">
+        <span class="card-title">Complaint Filters</span>
+        <button class="btn btn-ghost btn-sm" onclick="currentFilters={ward:'',priority:'',status:'',search:''};loadComplaints();">Reset</button>
+      </div>
+      <div class="filter-bar">
+        <select class="form-control" id="filter-ward" onchange="filterComplaints()">
+          <option value="">All Localities</option>
+          <option value="Connaught Place">Connaught Place</option>
+          <option value="Civil Lines">Civil Lines</option>
+          <option value="Karol Bagh">Karol Bagh</option>
+          <option value="Rohini">Rohini</option>
+          <option value="Dwarka">Dwarka</option>
+          <option value="Lajpat Nagar">Lajpat Nagar</option>
+        </select>
+        <select class="form-control" id="filter-priority" onchange="filterComplaints()">
+          <option value="">All Priorities</option>
+          <option value="CRITICAL">🚨 Critical</option>
+          <option value="HIGH">⚠️ High</option>
+          <option value="MEDIUM">🟡 Medium</option>
+          <option value="LOW">✅ Low</option>
+        </select>
+        <select class="form-control" id="filter-status" onchange="filterComplaints()">
+          <option value="">All Statuses</option>
+          <option value="Pending">Pending</option>
+          <option value="Assigned">Assigned</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Resolved">Resolved</option>
+          <option value="Escalated">Escalated</option>
+        </select>
+        <div class="input-wrapper search-input" style="flex:1;max-width:280px;">
+          <span class="input-icon" style="font-size:13px;">🔍</span>
+          <input type="text" class="form-control" id="filter-search" placeholder="Search complaint text…" oninput="filterComplaints()">
+        </div>
+      </div>
+      <div class="filter-info" id="filter-info">Loading complaints…</div>
+    </div>
+
+    <div class="table-wrapper">
+      <table class="complaints-table">
+        <thead>
+          <tr>
+            <th>Complaint ID</th>
+            <th>Ward</th>
+            <th>Description</th>
+            <th>Category</th>
+            <th>Priority</th>
+            <th>Status</th>
+            <th>SLA</th>
+            <th>Department</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="complaints-tbody">
+          <tr><td colspan="9" style="text-align:center;color:var(--text-muted);padding:40px;">Loading…</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div><!-- /panel-complaints -->
+
+  <!-- ─────────────────────────────────────────────────────────────────────
+       PANEL: ANALYTICS
+       ───────────────────────────────────────────────────────────────────── -->
+  <div class="dashboard-panel" id="panel-analytics">
+    <div class="charts-2x3">
+      <div class="chart-container">
+        <div class="card-header"><span class="card-title">📊 Complaints by Ward</span></div>
+        <canvas id="ward-chart"></canvas>
+      </div>
+      <div class="chart-container">
+        <div class="card-header"><span class="card-title">📅 7-Day Trend</span></div>
+        <canvas id="trend-chart"></canvas>
+      </div>
+      <div class="chart-container">
+        <div class="card-header"><span class="card-title">🔴 Priority Distribution</span></div>
+        <canvas id="priority-chart"></canvas>
+      </div>
+      <div class="chart-container">
+        <div class="card-header"><span class="card-title">📈 Escalation vs Resolution</span></div>
+        <canvas id="escalation-chart"></canvas>
+      </div>
+      <div class="chart-container">
+        <div class="card-header"><span class="card-title">⏱️ Avg Response Time (hrs)</span></div>
+        <canvas id="response-chart"></canvas>
+      </div>
+      <div class="chart-container">
+        <div class="card-header"><span class="card-title">🗂️ Category Breakdown</span></div>
+        <canvas id="category-chart"></canvas>
+      </div>
+    </div>
+  </div><!-- /panel-analytics -->
+
+  <!-- ─────────────────────────────────────────────────────────────────────
+       PANEL: HEATMAP
+       ───────────────────────────────────────────────────────────────────── -->
+  <div class="dashboard-panel" id="panel-heatmap">
+    <div class="card" style="margin-bottom:20px;">
+      <div class="card-header">
+        <span class="card-title">🗺️ Ward Risk Heatmap — Delhi Municipal Intelligence</span>
+        <span style="font-size:12px;color:var(--text-muted);">Live complaint density</span>
+      </div>
+      <div id="ward-map"></div>
+    </div>
+    <div class="density-cards-grid" id="density-cards"></div>
+  </div><!-- /panel-heatmap -->
+
+  <!-- ─────────────────────────────────────────────────────────────────────
+       PANEL: INTELLIGENCE
+       ───────────────────────────────────────────────────────────────────── -->
+  <div class="dashboard-panel" id="panel-intelligence">
+
+    <!-- Responsible AI -->
+    <div class="card" style="margin-bottom:20px;">
+      <div class="card-header"><span class="card-title">🤖 Responsible AI — Model Integrity</span></div>
+      <div id="rai-panel"></div>
+    </div>
+
+    <!-- Impact Summary -->
+    <div class="card" style="margin-bottom:20px;">
+      <div class="card-header"><span class="card-title">📊 Impact Summary</span></div>
+      <div id="impact-panel"></div>
+    </div>
+
+    <!-- Keyword Frequency -->
+    <div class="card" style="margin-bottom:20px;">
+      <div class="card-header">
+        <span class="card-title">🔤 Severity Keyword Frequency</span>
+        <span style="font-size:12px;color:var(--text-muted);">Top 12 detected keywords</span>
+      </div>
+      <div id="keyword-panel"></div>
+    </div>
+
+    <!-- Ward Recommendations -->
+    <div class="card" style="margin-bottom:20px;">
+      <div class="card-header"><span class="card-title">🧭 Ward-Level AI Recommendations</span></div>
+      <div id="ward-recs-container"></div>
+    </div>
+
+    <!-- Deployment Plan -->
+    <div class="card">
+      <div class="card-header"><span class="card-title">📋 Resource Deployment Plan</span></div>
+      <div id="deployment-plan-container"></div>
+    </div>
+
+  </div><!-- /panel-intelligence -->
+
+  <!-- ─────────────────────────────────────────────────────────────────────
+       PANEL: SETTINGS
+       ───────────────────────────────────────────────────────────────────── -->
+  <div class="dashboard-panel" id="panel-settings">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+
+      <div class="card">
+        <div class="card-header"><span class="card-title">⚙️ Priority Engine Settings</span></div>
+
+        <div class="setting-row">
+          <div>
+            <div class="setting-label">Emergency Mode</div>
+            <div class="setting-sublabel" id="weight-display">Weights: 0.6 × Severity + 0.4 × Credibility</div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="emergency-toggle">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="setting-row">
+          <div>
+            <div class="setting-label">Current Mode</div>
+            <div class="setting-sublabel" id="mode-label" style="color:var(--green-low);">✅ Normal Mode</div>
+          </div>
+        </div>
+
+        <div class="setting-row">
+          <div>
+            <div class="setting-label">Priority Formula</div>
+            <div class="setting-sublabel" style="font-family:'JetBrains Mono',monospace;font-size:11px;">score = 0.6 × severity + 0.4 × credibility</div>
+          </div>
+        </div>
+
+        <div style="margin-top:20px;">
+          <button class="btn btn-secondary" id="recalc-btn" style="width:100%;justify-content:center;">
+            ⟳ Recalculate All Complaints
+          </button>
+          <p style="font-size:11px;color:var(--text-muted);margin-top:8px;text-align:center;">
+            Applies current weights to all existing complaints
+          </p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header"><span class="card-title">ℹ️ System Information</span></div>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <div class="setting-row" style="padding:10px 0;">
+            <span style="font-size:13px;color:var(--text-secondary);">Platform</span>
+            <span style="font-size:13px;color:var(--amber);font-family:'JetBrains Mono',monospace;">NagarAI v1.0.0</span>
+          </div>
+          <div class="setting-row" style="padding:10px 0;">
+            <span style="font-size:13px;color:var(--text-secondary);">Initiative</span>
+            <span style="font-size:13px;color:var(--text-primary);">Ministry of Urban Affairs</span>
+          </div>
+          <div class="setting-row" style="padding:10px 0;">
+            <span style="font-size:13px;color:var(--text-secondary);">ML Models</span>
+            <span style="font-size:13px;color:var(--text-primary);">Severity + Credibility + Priority</span>
+          </div>
+          <div class="setting-row" style="padding:10px 0;">
+            <span style="font-size:13px;color:var(--text-secondary);">AI Confidence</span>
+            <span style="font-size:13px;color:var(--green-low);font-weight:700;">92.4%</span>
+          </div>
+          <div class="setting-row" style="padding:10px 0;">
+            <span style="font-size:13px;color:var(--text-secondary);">API Backend</span>
+            <span style="font-size:12px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;">localhost:8000</span>
+          </div>
+          <div class="setting-row" style="padding:10px 0;">
+            <span style="font-size:13px;color:var(--text-secondary);">Auto-Refresh</span>
+            <span style="font-size:13px;color:var(--green-low);">Every 30 seconds</span>
+          </div>
+        </div>
+
+        <div style="margin-top:20px;display:flex;gap:8px;flex-wrap:wrap;">
+          <a href="transparency.html" class="btn btn-ghost btn-sm">📊 Transparency Portal</a>
+          <a href="complaint.html"    class="btn btn-ghost btn-sm">📋 Submit Test Complaint</a>
+          <a href="index.html"        class="btn btn-ghost btn-sm">🏛️ Home</a>
+        </div>
+      </div>
+
+    </div>
+  </div><!-- /panel-settings -->
+
+</main><!-- /dashboard-main -->
+
+<!-- ═══ COMPLAINT DETAIL MODAL ═════════════════════════════════════════════ -->
+<div class="modal-overlay" id="complaint-modal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title">Complaint Details</div>
+        <div style="font-size:12px;color:var(--text-muted);margin-top:4px;">
+          <span id="modal-cid" style="font-family:'JetBrains Mono',monospace;color:var(--amber);"></span>
+          &nbsp;·&nbsp;
+          <span id="modal-created"></span>
+        </div>
+      </div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+
+    <!-- Meta row -->
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;">
+      <div id="modal-priority"></div>
+      <span id="modal-status-lbl" class="badge badge-pending"></span>
+      <span id="modal-dept" class="badge badge-dept"></span>
+    </div>
+
+    <!-- Complaint text -->
+    <div class="modal-section">
+      <div class="modal-section-title">Complaint Description</div>
+      <p id="modal-text" style="font-size:14px;color:var(--text-primary);line-height:1.7;background:rgba(0,0,0,0.15);border-radius:var(--radius-sm);padding:14px;"></p>
+      <div style="display:flex;gap:16px;margin-top:10px;flex-wrap:wrap;">
+        <span style="font-size:12px;color:var(--text-muted);">Ward: <span id="modal-ward" style="color:var(--amber);"></span></span>
+        <span style="font-size:12px;color:var(--text-muted);">Category: <span id="modal-category" style="color:var(--text-secondary);"></span></span>
+      </div>
+    </div>
+
+    <!-- AI Scores -->
+    <div class="modal-section">
+      <div class="modal-section-title">AI Analysis Scores</div>
+      <div class="score-row">
+        <span class="score-label">Severity</span>
+        <div class="score-bar-wrap"><div class="score-bar-fill severity" id="modal-sev-bar"></div></div>
+        <span class="score-value" id="modal-sev-val">—</span>
+      </div>
+      <div class="score-row">
+        <span class="score-label">Credibility</span>
+        <div class="score-bar-wrap"><div class="score-bar-fill credibility" id="modal-cred-bar"></div></div>
+        <span class="score-value" id="modal-cred-val">—</span>
+      </div>
+      <div class="score-row">
+        <span class="score-label">Priority Score</span>
+        <div class="score-bar-wrap"><div class="score-bar-fill priority" id="modal-pri-bar"></div></div>
+        <span class="score-value" id="modal-pri-val">—</span>
+      </div>
+    </div>
+
+    <!-- Keywords + Features -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;">
+      <div>
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--amber);margin-bottom:8px;">Severity Keywords</div>
+        <div class="tag-list" id="modal-keywords"></div>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:8px;">Credibility Signals</div>
+        <div class="tag-list" id="modal-features"></div>
+      </div>
+    </div>
+
+    <!-- AI Recommendation (legacy slot kept for backward compat) -->
+    <div id="modal-rec"></div>
+
+    <!-- AI Recommendation Card — animated amber-bordered card injected by dashboard.js -->
+    <div id="modal-recommendation-container"></div>
+
+    <!-- SLA + Duplicate + Emergency -->
+    <div class="modal-section">
+      <div class="modal-section-title">Metadata</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;">
+        <div>
+          <div style="font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;">SLA Status</div>
+          <div id="modal-sla" style="font-size:13px;"></div>
+        </div>
+        <div>
+          <div style="font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;">Duplicate</div>
+          <div id="modal-dup" style="font-size:13px;"></div>
+        </div>
+        <div>
+          <div style="font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;">Emergency</div>
+          <div id="modal-emergency" style="font-size:13px;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lifecycle -->
+    <div class="modal-section">
+      <div class="modal-section-title">Complaint Lifecycle</div>
+      <div class="lifecycle" id="modal-lifecycle"></div>
+    </div>
+
+    <!-- Status Update -->
+    <div class="modal-section">
+      <div class="modal-section-title">Update Status</div>
+      <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+        <select class="form-control" id="status-select" style="flex:1;max-width:220px;">
+          <option value="Pending">Pending</option>
+          <option value="Assigned">Assigned</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Resolved">Resolved</option>
+          <option value="Escalated">Escalated</option>
+        </select>
+        <button class="btn btn-primary" onclick="updateComplaintStatus(currentModalId)">
+          ✅ Update Status
+        </button>
+        <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /modal -->
+
+<!-- ═══ TOAST CONTAINER ════════════════════════════════════════════════════ -->
+<div class="toast-container" id="toast-container"></div>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="js/api.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/heatmap.js"></script>
+<script src="js/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>File a Complaint — नागरAI NagarAI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- Government Stripe -->
+<div class="gov-stripe">
+  <div class="gov-stripe-inner">
+    <span>🇮🇳 Ministry of Urban Affairs | Government of India</span>
+    <div class="accessibility">
+      <span>Screen Reader Access</span>
+      <button onclick="adjustFont(1.1)">A+</button>
+      <button onclick="adjustFont(1.0)">A</button>
+      <button onclick="adjustFont(0.9)">A-</button>
+    </div>
+  </div>
+</div>
+
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="brand">
+    <div class="brand-logo">🏛️</div>
+    <div class="brand-text">
+      <span class="hindi">नागरAI</span>
+      <span class="sep">|</span>
+      <span class="english">NagarAI</span>
+      <span class="tagline">AI Municipal Decision Intelligence</span>
+    </div>
+  </div>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="index.html#modules">AI Modules</a>
+    <a href="complaint.html" class="active">File Complaint</a>
+    <a href="transparency.html">Transparency</a>
+    <a href="login.html" class="btn-officer">Officer Login</a>
+  </div>
+  <button class="hamburger" onclick="toggleMobileMenu()">☰</button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="index.html">Home</a>
+  <a href="complaint.html">File Complaint</a>
+  <a href="transparency.html">Transparency</a>
+  <a href="login.html">Officer Login</a>
+</div>
+
+<div class="emergency-banner" id="emergency-banner"></div>
+
+<!-- ═══ PAGE HEADER ════════════════════════════════════════════════════════ -->
+<div style="background:var(--navy-mid);border-bottom:1px solid var(--border-subtle);padding:32px 24px;">
+  <div style="max-width:1280px;margin:0 auto;">
+    <h1 class="page-section-title">📋 File a Municipal Complaint</h1>
+    <p class="page-section-sub">Submit your concern directly to the AI-powered NagarAI platform. Your complaint will be analyzed and prioritized within seconds.</p>
+  </div>
+</div>
+
+<!-- ═══ MAIN TWO-COLUMN LAYOUT ════════════════════════════════════════════ -->
+<div class="complaint-page-inner">
+
+  <!-- LEFT: Complaint Form -->
+  <div>
+    <div class="card">
+      <h2 style="font-family:'Syne',sans-serif;font-weight:700;font-size:18px;color:var(--text-primary);margin-bottom:24px;">New Complaint</h2>
+
+      <div class="form-group">
+        <label class="form-label" for="cat">Category *</label>
+        <select class="form-control" id="cat" required>
+          <option value="">— Select Category —</option>
+          <option value="Emergency">🚨 Emergency</option>
+          <option value="Garbage Issue">🗑️ Garbage Issue</option>
+          <option value="Road Damage">🛣️ Road Damage</option>
+          <option value="Water Leakage">💧 Water Leakage</option>
+          <option value="Street Light Failure">💡 Street Light Failure</option>
+          <option value="Public Safety">🛡️ Public Safety</option>
+        </select>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+        <div class="form-group">
+          <label class="form-label" for="ward-id">Ward *</label>
+          <select class="form-control" id="ward-id" required onchange="syncWardName()">
+            <option value="" disabled selected>Select your locality</option>
+            <option value="1" data-name="Connaught Place">Connaught Place</option>
+            <option value="2" data-name="Civil Lines">Civil Lines</option>
+            <option value="3" data-name="Karol Bagh">Karol Bagh</option>
+            <option value="4" data-name="Rohini">Rohini</option>
+            <option value="5" data-name="Dwarka">Dwarka</option>
+            <option value="6" data-name="Lajpat Nagar">Lajpat Nagar</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="location">Location (optional)</label>
+          <input type="text" class="form-control" id="location" placeholder="e.g. Near Main Market, Lane 4">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="complaint-text">Complaint Description * <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--text-muted)">(min 20 characters)</span></label>
+        <textarea class="form-control" id="complaint-text" rows="6"
+          placeholder="Describe the issue in detail. Include when it started, how it affects you and your neighbours, and any relevant observations…"
+          oninput="updateCharCount(this)"></textarea>
+        <div class="char-count"><span id="char-count">0</span> characters</div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Supporting Photo (optional)</label>
+        <div class="file-upload-area" onclick="document.getElementById('img-upload').click()">
+          <div style="font-size:28px;">📷</div>
+          <p>Click to upload or drag and drop</p>
+          <p style="font-size:11px;margin-top:4px;">JPG, PNG up to 5MB</p>
+        </div>
+        <input type="file" id="img-upload" accept="image/*" style="display:none" onchange="handleFileSelect(this)">
+        <div id="file-name" style="font-size:12px;color:var(--amber);margin-top:6px;"></div>
+      </div>
+
+      <div id="form-error" style="display:none;background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);border-radius:var(--radius-sm);padding:10px 14px;color:#fca5a5;font-size:13px;margin-bottom:16px;"></div>
+
+      <button class="btn btn-primary btn-lg" id="submit-btn" onclick="submitComplaint()" style="width:100%;">
+        🤖 Submit & Analyze with AI
+      </button>
+
+      <p style="font-size:11px;color:var(--text-muted);text-align:center;margin-top:12px;">
+        Your complaint will be analyzed by NagarAI in seconds. You will receive a Complaint ID to track progress.
+      </p>
+    </div>
+
+    <!-- ─── RESULT CARD (shown after submission) ───────────────────────── -->
+    <div class="result-card" id="result-card">
+
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;flex-wrap:wrap;gap:12px;">
+        <div>
+          <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:20px;color:var(--text-primary);">Analysis Complete</div>
+          <div style="font-size:13px;color:var(--text-secondary);margin-top:4px;">Your complaint has been analyzed and queued for action.</div>
+        </div>
+        <div id="result-priority-badge"></div>
+      </div>
+
+      <!-- Complaint ID -->
+      <div style="background:rgba(245,158,11,0.06);border:1px solid var(--border-amber);border-radius:var(--radius-sm);padding:14px 18px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+        <div>
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:4px;">Complaint ID</div>
+          <div id="result-cid" style="font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;color:var(--amber);">—</div>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <span id="result-dept" class="badge badge-dept">—</span>
+          <button class="btn btn-sm btn-secondary" onclick="copyComplaintId()">📋 Copy ID</button>
+        </div>
+      </div>
+
+      <!-- Score Bars -->
+      <div class="modal-section">
+        <div class="modal-section-title">AI Scores</div>
+        <div class="score-row">
+          <span class="score-label">Severity</span>
+          <div class="score-bar-wrap"><div class="score-bar-fill severity" id="res-sev-bar"></div></div>
+          <span class="score-value" id="res-sev-val">—</span>
+        </div>
+        <div class="score-row">
+          <span class="score-label">Credibility</span>
+          <div class="score-bar-wrap"><div class="score-bar-fill credibility" id="res-cred-bar"></div></div>
+          <span class="score-value" id="res-cred-val">—</span>
+        </div>
+        <div class="score-row">
+          <span class="score-label">Priority Score</span>
+          <div class="score-bar-wrap"><div class="score-bar-fill priority" id="res-pri-bar"></div></div>
+          <span class="score-value" id="res-pri-val">—</span>
+        </div>
+      </div>
+
+      <!-- Keywords & Features -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;">
+        <div>
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--amber);margin-bottom:8px;">Severity Keywords</div>
+          <div class="tag-list" id="res-keywords"></div>
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:8px;">Credibility Signals</div>
+          <div class="tag-list" id="res-features"></div>
+        </div>
+      </div>
+
+      <!-- AI Recommendation -->
+      <div id="res-recommendation"></div>
+
+      <!-- SLA Info -->
+      <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:20px;">
+        <div style="background:rgba(0,0,0,0.2);border-radius:var(--radius-sm);padding:10px 16px;flex:1;min-width:120px;">
+          <div style="font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:3px;">SLA Deadline</div>
+          <div id="res-sla" style="font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--amber);font-weight:600;">—</div>
+        </div>
+        <div style="background:rgba(0,0,0,0.2);border-radius:var(--radius-sm);padding:10px 16px;flex:1;min-width:120px;">
+          <div style="font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:3px;">Department</div>
+          <div id="res-dept-name" style="font-size:13px;color:var(--text-secondary);font-weight:500;">—</div>
+        </div>
+        <div style="background:rgba(0,0,0,0.2);border-radius:var(--radius-sm);padding:10px 16px;flex:1;min-width:120px;">
+          <div style="font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:3px;">Status</div>
+          <div style="font-size:13px;"><span class="badge badge-pending">Pending Review</span></div>
+        </div>
+      </div>
+
+      <!-- Lifecycle Stepper -->
+      <div class="modal-section">
+        <div class="modal-section-title">Complaint Lifecycle</div>
+        <div class="lifecycle" id="res-lifecycle">
+          <div class="step-item current"><div class="dot">●</div><div class="step-text">Submitted</div></div>
+          <div class="step-line"></div>
+          <div class="step-item"><div class="dot">○</div><div class="step-text">Assigned</div></div>
+          <div class="step-line"></div>
+          <div class="step-item"><div class="dot">○</div><div class="step-text">In Progress</div></div>
+          <div class="step-line"></div>
+          <div class="step-item"><div class="dot">○</div><div class="step-text">Resolved</div></div>
+        </div>
+      </div>
+
+      <!-- Citizen Feedback -->
+      <div class="modal-section" id="feedback-section" style="margin-top:20px;">
+        <div class="modal-section-title">Rate Your Submission Experience</div>
+        <p style="font-size:13px;color:var(--text-secondary);margin-bottom:12px;">Help us improve the platform. How was your experience filing this complaint?</p>
+        <div class="star-rating" id="star-rating">
+          <span class="star" data-rating="1" onclick="selectStar(1)">★</span>
+          <span class="star" data-rating="2" onclick="selectStar(2)">★</span>
+          <span class="star" data-rating="3" onclick="selectStar(3)">★</span>
+          <span class="star" data-rating="4" onclick="selectStar(4)">★</span>
+          <span class="star" data-rating="5" onclick="selectStar(5)">★</span>
+        </div>
+        <textarea class="form-control" id="feedback-comment" rows="2" placeholder="Optional: share any feedback…" style="margin-top:10px;"></textarea>
+        <button class="btn btn-secondary" onclick="submitFeedback()" style="margin-top:12px;" id="feedback-btn">
+          Submit Feedback
+        </button>
+        <div id="feedback-msg" style="display:none;color:var(--green-low);font-size:13px;margin-top:8px;">✅ Thank you for your feedback!</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT: Track Complaint -->
+  <div>
+    <div class="track-card">
+      <h3 style="font-family:'Syne',sans-serif;font-weight:700;font-size:16px;color:var(--text-primary);margin-bottom:16px;">🔍 Track Your Complaint</h3>
+      <p style="font-size:13px;color:var(--text-secondary);margin-bottom:16px;">Enter your Complaint ID (e.g. CMP-2025-001) to check the current status.</p>
+
+      <div class="input-wrapper">
+        <span class="input-icon">📋</span>
+        <input type="text" class="form-control" id="track-id" placeholder="CMP-2025-001"
+          onkeydown="if(event.key==='Enter') trackComplaint()">
+      </div>
+      <button class="btn btn-primary" onclick="trackComplaint()" style="width:100%;margin-top:12px;">
+        🔍 Track Complaint
+      </button>
+
+      <!-- Track Result -->
+      <div id="track-result" style="display:none;margin-top:20px;">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--amber);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border-subtle);">Complaint Status</div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-size:12px;color:var(--text-muted);">Complaint ID</span>
+            <span id="tr-cid" style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--amber);font-weight:600;">—</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-size:12px;color:var(--text-muted);">Category</span>
+            <span id="tr-cat" style="font-size:12px;color:var(--text-secondary);">—</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-size:12px;color:var(--text-muted);">Ward</span>
+            <span id="tr-ward" style="font-size:12px;color:var(--text-secondary);">—</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-size:12px;color:var(--text-muted);">Priority</span>
+            <span id="tr-priority">—</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-size:12px;color:var(--text-muted);">Status</span>
+            <span id="tr-status">—</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-size:12px;color:var(--text-muted);">Department</span>
+            <span id="tr-dept" class="badge badge-dept" style="font-size:10px;">—</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-size:12px;color:var(--text-muted);">SLA</span>
+            <span id="tr-sla" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-secondary);">—</span>
+          </div>
+        </div>
+        <div style="margin-top:16px;">
+          <div style="font-size:11px;color:var(--text-muted);margin-bottom:8px;">Description Preview</div>
+          <p id="tr-text" style="font-size:12px;color:var(--text-secondary);line-height:1.6;background:rgba(0,0,0,0.2);border-radius:var(--radius-sm);padding:10px;max-height:80px;overflow:hidden;text-overflow:ellipsis;"></p>
+        </div>
+      </div>
+
+      <div id="track-error" style="display:none;margin-top:16px;color:var(--red-critical);font-size:13px;"></div>
+
+      <!-- Info Tips -->
+      <div style="margin-top:24px;border-top:1px solid var(--border-subtle);padding-top:20px;">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:12px;">Priority Levels</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="display:flex;align-items:center;gap:10px;"><span class="badge badge-critical">CRITICAL</span><span style="font-size:12px;color:var(--text-muted);">SLA: 6 hours</span></div>
+          <div style="display:flex;align-items:center;gap:10px;"><span class="badge badge-high">HIGH</span><span style="font-size:12px;color:var(--text-muted);">SLA: 36 hours</span></div>
+          <div style="display:flex;align-items:center;gap:10px;"><span class="badge badge-medium">MEDIUM</span><span style="font-size:12px;color:var(--text-muted);">SLA: 48 hours</span></div>
+          <div style="display:flex;align-items:center;gap:10px;"><span class="badge badge-low">LOW</span><span style="font-size:12px;color:var(--text-muted);">SLA: 96 hours</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /complaint-page-inner -->
+
+<!-- ═══ FOOTER ════════════════════════════════════════════════════════════ -->
+<footer class="gov-footer">
+  <div class="footer-grid">
+    <div class="footer-col">
+      <div class="footer-brand">नागरAI | NagarAI</div>
+      <p>AI Municipal Decision Intelligence — Government of India Initiative</p>
+    </div>
+    <div class="footer-col">
+      <h4>Government of India</h4>
+      <ul>
+        <li><a href="#">Ministry of Urban Affairs</a></li>
+        <li><a href="#">Smart Cities Mission</a></li>
+        <li><a href="#">Digital India Portal</a></li>
+        <li><a href="#">MyGov.in</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>AI Modules</h4>
+      <ul>
+        <li><a href="#">सुरक्षित Surakshit – Safety Intelligence</a></li>
+        <li><a href="#">विश्वास Vishwas – Credibility Assessment</a></li>
+        <li><a href="#">प्राथमिक Prathmik – Priority Engine</a></li>
+        <li><a href="#">निरीक्षण Nirikshan – City Intelligence</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <p>Helpline: 1800-XXX-XXXX (24×7)</p>
+      <p>Ministry of Urban Affairs, Nirman Bhawan, New Delhi - 110011</p>
+    </div>
+  </div>
+  <div style="border-top:1px solid var(--border-subtle);padding:20px 24px;max-width:1280px;margin:0 auto;">
+    <div class="footer-bottom">
+      <p>© 2025 नागरAI NagarAI – Ministry of Urban Affairs, Government of India</p>
+      <p>Government of India Initiative</p>
+      <div class="footer-links"><a href="#">RTI</a> | <a href="#">Terms</a> | <a href="#">Privacy</a> | <a href="#">Accessibility</a></div>
+      <p class="disclaimer">Best viewed in Chrome/Firefox at 1024×768 or higher.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="js/api.js"></script>
+<script src="js/auth.js"></script>
+<script>
+/* ── State ─────────────────────────────────────────────────────────────────── */
+let currentComplaintId = null;
+let selectedRating     = 0;
+
+/* ── Helpers ───────────────────────────────────────────────────────────────── */
+function updateCharCount(el) {
+  document.getElementById('char-count').textContent = el.value.length;
+}
+function syncWardName() {}
+function handleFileSelect(input) {
+  const fn = document.getElementById('file-name');
+  fn.textContent = input.files[0] ? '📎 ' + input.files[0].name : '';
+}
+
+function animScoreBar(id, score, max) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.style.width = '0%';
+  setTimeout(() => { el.style.width = ((score / max) * 100) + '%'; }, 100);
+}
+
+function copyComplaintId() {
+  if (currentComplaintId) {
+    navigator.clipboard.writeText(currentComplaintId).then(() => {
+      showMini('✅ Copied!');
+    });
+  }
+}
+
+function showMini(msg) {
+  const t = document.createElement('div');
+  t.className = 'toast'; t.textContent = msg;
+  t.style.cssText = 'position:fixed;bottom:24px;right:24px;z-index:10000;background:#0d1b35;border:1px solid #22c55e;border-left:4px solid #22c55e;border-radius:8px;padding:10px 18px;font-size:13px;color:#e2e8f0;animation:toastSlide 0.3s ease;';
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 2500);
+}
+
+/* ── Star Rating ───────────────────────────────────────────────────────────── */
+function selectStar(n) {
+  selectedRating = n;
+  document.querySelectorAll('#star-rating .star').forEach((s, i) => {
+    s.classList.toggle('selected', i < n);
+  });
+}
+
+/* ── Submit Complaint ──────────────────────────────────────────────────────── */
+async function submitComplaint() {
+  const catEl      = document.getElementById('cat');
+  const wardIdEl   = document.getElementById('ward-id');
+  const textEl     = document.getElementById('complaint-text');
+  const locationEl = document.getElementById('location');
+  const errEl      = document.getElementById('form-error');
+  const btn        = document.getElementById('submit-btn');
+
+  // Validate
+  errEl.style.display = 'none';
+  if (!catEl.value)          { showError(errEl, 'Please select a category.'); return; }
+  if (!wardIdEl.value)        { showError(errEl, 'Please select your ward.'); return; }
+  if (textEl.value.trim().length < 20) { showError(errEl, 'Please describe your complaint in at least 20 characters.'); return; }
+
+  const selectedOption = wardIdEl.options[wardIdEl.selectedIndex];
+  const wardName       = selectedOption.dataset.name || selectedOption.text || 'Unknown Locality';
+
+  btn.disabled   = true;
+  btn.innerHTML  = '<span>⟳</span> AI is analyzing your complaint…';
+
+  try {
+    const result = await API.submitComplaint({
+      text    : textEl.value.trim(),
+      category: catEl.value,
+      ward_id : parseInt(wardIdEl.value),
+      ward_name: wardName,
+      location: locationEl.value.trim() || null,
+    });
+
+    currentComplaintId = result.complaint_id;
+    displayResult(result);
+
+  } catch (err) {
+    showError(errEl, 'Submission failed: ' + (err.message || 'Please try again.'));
+    btn.disabled  = false;
+    btn.innerHTML = '🤖 Submit & Analyze with AI';
+  }
+}
+
+function showError(el, msg) {
+  el.textContent  = msg;
+  el.style.display = 'block';
+}
+
+function displayResult(r) {
+  const rc = document.getElementById('result-card');
+  rc.classList.add('visible');
+
+  // Priority badge
+  const priEl = document.getElementById('result-priority-badge');
+  const label = r.priority_label || 'LOW';
+  priEl.innerHTML = `<span class="badge badge-${label.toLowerCase()}" style="font-size:14px;padding:6px 14px;">${label}</span>`;
+
+  // Complaint ID
+  document.getElementById('result-cid').textContent = r.complaint_id || '—';
+  document.getElementById('result-dept').textContent = (r.department || 'General').replace(' Department','').replace(' Cell','').replace(' & Police Coordination','');
+
+  // Score bars
+  const sev  = parseFloat(r.severity_score)   || 0;
+  const cred = parseFloat(r.credibility_score) || 0;
+  const pri  = parseFloat(r.priority_score)    || 0;
+
+  document.getElementById('res-sev-val').textContent  = (sev  * 10).toFixed(1) + ' / 10';
+  document.getElementById('res-cred-val').textContent = (cred * 10).toFixed(1) + ' / 10';
+  document.getElementById('res-pri-val').textContent  = (pri  * 10).toFixed(1) + ' / 10';
+
+  animScoreBar('res-sev-bar',  sev  * 10, 10);
+  animScoreBar('res-cred-bar', cred * 10, 10);
+  animScoreBar('res-pri-bar',  pri  * 10, 10);
+
+  // Keywords
+  const kwEl = document.getElementById('res-keywords');
+  const kws  = r.severity_keywords || [];
+  kwEl.innerHTML = kws.length ? kws.map(k => `<span class="tag">${k}</span>`).join('') : '<span style="color:var(--text-muted);font-size:12px;">None detected</span>';
+
+  // Credibility features
+  const featEl = document.getElementById('res-features');
+  const feats  = r.credibility_features || [];
+  featEl.innerHTML = feats.length ? feats.map(f => `<span class="tag-gray">${f}</span>`).join('') : '<span style="color:var(--text-muted);font-size:12px;">None</span>';
+
+  // AI Recommendation
+  const rec   = r.ai_recommendation;
+  const recEl = document.getElementById('res-recommendation');
+  if (rec && recEl) {
+    const urgClass = (rec.urgency || '').toLowerCase() === 'immediate' ? 'immediate' : '';
+    recEl.innerHTML = `
+      <div class="rec-card">
+        <div class="rec-card-header">
+          <span class="rec-card-icon">🧭</span>
+          <span class="rec-card-title">AI Recommendation</span>
+        </div>
+        <div class="rec-grid">
+          <div class="rec-field rec-action"><label>Action</label><p>${rec.action || '—'}</p></div>
+          <div class="rec-field"><label>Reason</label><p>${rec.reason || '—'}</p></div>
+          <div class="rec-field"><label>Impact</label><p>${rec.impact || '—'}</p></div>
+        </div>
+        <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:14px;">
+          <div><label style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);display:block;margin-bottom:3px;">Authority</label>
+          <span class="badge badge-dept">${rec.authority || '—'}</span></div>
+          <div><label style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);display:block;margin-bottom:3px;">Urgency</label>
+          <span class="urgency-badge ${urgClass}">${rec.urgency || '—'}</span></div>
+        </div>
+      </div>`;
+  }
+
+  // SLA
+  const slaMap = { CRITICAL:6, HIGH:36, MEDIUM:48, LOW:96 };
+  const slaHrs = r.sla_hours || slaMap[label] || 48;
+  document.getElementById('res-sla').textContent     = `${slaHrs} hours from now`;
+  document.getElementById('res-dept-name').textContent = r.department || '—';
+
+  // Reset form
+  const btn = document.getElementById('submit-btn');
+  btn.disabled  = false;
+  btn.innerHTML = '✅ Submitted Successfully';
+  btn.style.background = 'var(--green-low)';
+  btn.style.color = '#050d1a';
+
+  // Scroll to result
+  rc.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+/* ── Track Complaint ───────────────────────────────────────────────────────── */
+async function trackComplaint() {
+  const idInput = document.getElementById('track-id').value.trim().toUpperCase();
+  const resEl   = document.getElementById('track-result');
+  const errEl   = document.getElementById('track-error');
+
+  errEl.style.display  = 'none';
+  resEl.style.display  = 'none';
+
+  if (!idInput) { errEl.textContent = 'Please enter a Complaint ID.'; errEl.style.display = 'block'; return; }
+
+  try {
+    const c = await API.trackComplaint(idInput);
+    if (!c) {
+      errEl.textContent   = `Complaint "${idInput}" not found. Please check the ID.`;
+      errEl.style.display = 'block';
+      return;
+    }
+
+    document.getElementById('tr-cid').textContent   = c.complaint_id;
+    document.getElementById('tr-cat').textContent   = c.category;
+    document.getElementById('tr-ward').textContent  = c.ward_name;
+    document.getElementById('tr-text').textContent  = c.text;
+    document.getElementById('tr-sla').textContent   = `${c.time_elapsed_hours || 0}h / ${c.sla_hours}h`;
+
+    const lbl  = c.priority_label || 'LOW';
+    document.getElementById('tr-priority').innerHTML = `<span class="badge badge-${lbl.toLowerCase()}">${lbl}</span>`;
+    const stat = c.status || 'Pending';
+    const statCls = stat.toLowerCase().replace(/\s+/g,'');
+    document.getElementById('tr-status').innerHTML   = `<span class="badge badge-${statCls}">${stat}</span>`;
+
+    const deptShort = (c.department || 'General').replace(' Department','').replace(' Cell','');
+    document.getElementById('tr-dept').textContent = deptShort;
+
+    resEl.style.display = 'block';
+  } catch (err) {
+    errEl.textContent   = 'Failed to fetch complaint. Please try again.';
+    errEl.style.display = 'block';
+  }
+}
+
+/* ── Feedback ──────────────────────────────────────────────────────────────── */
+async function submitFeedback() {
+  if (!currentComplaintId)    { showMini('⚠️ Submit a complaint first'); return; }
+  if (selectedRating === 0)   { showMini('⚠️ Please select a star rating'); return; }
+
+  const comment = document.getElementById('feedback-comment').value.trim();
+  const btn     = document.getElementById('feedback-btn');
+  btn.disabled  = true;
+
+  try {
+    await API.submitFeedback(currentComplaintId, selectedRating, comment || null);
+    document.getElementById('feedback-msg').style.display = 'block';
+    document.getElementById('feedback-section').style.opacity = '0.6';
+  } catch (err) {
+    showMini('Feedback submission failed');
+    btn.disabled = false;
+  }
+}
+</script>
+</body>
+</html>

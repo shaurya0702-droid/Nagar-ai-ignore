@@ -1,0 +1,25 @@
+version: "3.9"
+
+# ═══════════════════════════════════════════════════════════════════════════
+#  NagarAI — Docker Compose DEV OVERRIDE
+#
+#  Usage:
+#    docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --build
+#
+#  What this adds vs production:
+#   - Mounts ./backend as volume for live code changes (Issue 5 — dev only)
+#   - Enables --reload on uvicorn for hot-reload (Issue 4 — dev only)
+#   - Sets DEBUG=true
+# ═══════════════════════════════════════════════════════════════════════════
+
+services:
+  backend:
+    # Fix Issue 4 (dev): --reload is acceptable in dev, just not production
+    command: uvicorn app.server:app --host 0.0.0.0 --port 8000 --reload
+    environment:
+      DEBUG: "true"
+    # Fix Issue 5 (dev): mount source code for live changes
+    volumes:
+      - ./backend:/app
+    ports:
+      - "8000:8000"

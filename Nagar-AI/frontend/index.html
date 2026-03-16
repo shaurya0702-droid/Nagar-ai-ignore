@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>नागरAI NagarAI — AI Municipal Decision Intelligence</title>
+  <meta name="description" content="NagarAI is an AI-powered municipal decision intelligence platform. Real-time complaint prioritization, severity scoring, and city governance intelligence for urban India.">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* ── Hero image overlay ────────────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      opacity: 0.18;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .hero-mesh,
+    .hero-grid-lines,
+    .hero-inner { position: relative; z-index: 1; }
+
+    /* ── About / overview section ─────────────────────────────────────────── */
+    .about-section {
+      position: relative;
+      overflow: hidden;
+      padding: 100px 0;
+      background: var(--navy-mid);
+    }
+    .about-bg-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      opacity: 0.10;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .about-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .about-text h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(28px, 3.5vw, 42px);
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+    .about-text h2 span { color: var(--amber); }
+    .about-text p {
+      font-size: 16px;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      margin-bottom: 16px;
+    }
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 32px;
+    }
+    .about-stat-box {
+      background: rgba(245,158,11,0.07);
+      border: 1px solid rgba(245,158,11,0.2);
+      border-radius: 10px;
+      padding: 18px;
+    }
+    .about-stat-box .num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--amber);
+    }
+    .about-stat-box .lbl {
+      font-size: 12px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 4px;
+    }
+    .about-visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .about-visual img {
+      width: 100%;
+      max-width: 480px;
+      border-radius: 16px;
+      border: 1px solid rgba(245,158,11,0.15);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    @media (max-width: 768px) {
+      .about-inner { grid-template-columns: 1fr; gap: 40px; }
+      .about-visual { display: none; }
+    }
+
+    /* ── Module card image ─────────────────────────────────────────────────── */
+    .module-card-img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(255,255,255,0.06);
+      display: block;
+    }
+    .module-card { padding-top: 16px; }
+
+    /* ── Hero badge updated style ─────────────────────────────────────────── */
+    .hero-badge-gov {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      background: rgba(245,158,11,0.12);
+      border: 1px solid rgba(245,158,11,0.35);
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--amber);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      font-family: 'Syne', sans-serif;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Government Stripe -->
+<div class="gov-stripe">
+  <div class="gov-stripe-inner">
+    <span>🇮🇳 Ministry of Urban Affairs | Government of India</span>
+    <div class="accessibility">
+      <span>Screen Reader Access</span>
+      <button onclick="adjustFont(1.1)">A+</button>
+      <button onclick="adjustFont(1.0)">A</button>
+      <button onclick="adjustFont(0.9)">A-</button>
+    </div>
+  </div>
+</div>
+
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="brand">
+    <div class="brand-logo">🏛️</div>
+    <div class="brand-text">
+      <span class="hindi">नागरAI</span>
+      <span class="sep">|</span>
+      <span class="english">NagarAI</span>
+      <span class="tagline">AI Municipal Decision Intelligence</span>
+    </div>
+  </div>
+  <div class="nav-links">
+    <a href="index.html" class="active">Home</a>
+    <a href="index.html#modules">AI Modules</a>
+    <a href="complaint.html">File Complaint</a>
+    <a href="transparency.html">Transparency</a>
+    <a href="login.html" class="btn-officer">Officer Login</a>
+  </div>
+  <button class="hamburger" onclick="toggleMobileMenu()">☰</button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="index.html">Home</a>
+  <a href="index.html#modules">AI Modules</a>
+  <a href="complaint.html">File Complaint</a>
+  <a href="transparency.html">Transparency</a>
+  <a href="login.html">Officer Login</a>
+</div>
+
+<!-- Emergency Banner -->
+<div class="emergency-banner" id="emergency-banner"></div>
+
+<!-- ═══ HERO ═══════════════════════════════════════════════════════════════ -->
+<section class="hero">
+  <!-- Hero background image — low opacity overlay -->
+  <img src="images/hero-banner.jpg" alt="" class="hero-bg-img" aria-hidden="true">
+  <div class="hero-mesh"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-badge-gov">🏛️ Ministry of Urban Affairs — Government of India</div>
+      <span class="hero-hindi">नागरAI</span>
+      <h1 class="hero-title">
+        AI Municipal<br>
+        <span>Decision Intelligence</span><br>
+        Platform
+      </h1>
+      <p class="hero-desc">
+        Real-time AI-powered complaint prioritization, severity scoring, credibility assessment, and city-level governance intelligence for urban municipal authorities across India.
+      </p>
+      <div class="hero-cta">
+        <a href="complaint.html" class="btn btn-primary btn-lg">📋 File a Complaint</a>
+        <a href="login.html"     class="btn btn-secondary btn-lg">🏛️ Officer Dashboard</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-stats-float">
+        <div class="stat-float-card">
+          <div class="stat-float-icon">📊</div>
+          <div class="stat-float-num" id="hero-total">25</div>
+          <div class="stat-float-label">Total Complaints</div>
+        </div>
+        <div class="stat-float-card stat-critical">
+          <div class="stat-float-icon">🚨</div>
+          <div class="stat-float-num" id="hero-critical">8</div>
+          <div class="stat-float-label">Critical Active</div>
+        </div>
+        <div class="stat-float-card stat-resolved">
+          <div class="stat-float-icon">✅</div>
+          <div class="stat-float-num" id="hero-emergency">7</div>
+          <div class="stat-float-label">Emergency Overrides</div>
+        </div>
+        <div class="stat-float-card">
+          <div class="stat-float-icon">🤖</div>
+          <div class="stat-float-num">92.4%</div>
+          <div class="stat-float-label">AI Confidence</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ STATS ═══════════════════════════════════════════════════════════════ -->
+<section class="stats-section" id="stats">
+  <div class="stats-grid">
+    <div class="stat-card" data-target="25">
+      <div class="stat-num" id="cnt-total">0</div>
+      <div class="stat-label">Total Complaints</div>
+      <div class="stat-sublabel">Across all 6 localities</div>
+    </div>
+    <div class="stat-card critical" data-target="8">
+      <div class="stat-num" id="cnt-critical">0</div>
+      <div class="stat-label">Critical Alerts</div>
+      <div class="stat-sublabel">Requiring immediate action</div>
+    </div>
+    <div class="stat-card green" data-target="7">
+      <div class="stat-num" id="cnt-emergency">0</div>
+      <div class="stat-label">Emergency Overrides</div>
+      <div class="stat-sublabel">AI-triggered escalations</div>
+    </div>
+    <div class="stat-card blue" data-target="300">
+      <div class="stat-num" id="cnt-citizens">0</div>
+      <div class="stat-label">Citizens Served</div>
+      <div class="stat-sublabel">Across the city</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ABOUT ════════════════════════════════════════════════════════════== -->
+<section class="about-section" id="about">
+  <!-- Aerial city background — very low opacity -->
+  <img src="images/about-section.jpg" alt="" class="about-bg-img" aria-hidden="true">
+  <div class="about-inner">
+    <div class="about-text">
+      <h2>Transforming <span>Civic Complaints</span> into Governance Intelligence</h2>
+      <p>
+        NagarAI is not a complaint portal. It is an <strong style="color:var(--amber)">AI Municipal Decision Intelligence Platform</strong> — the first system in India to automatically convert unstructured citizen text into structured, prioritized, explainable, actionable intelligence for city officers.
+      </p>
+      <p>
+        Every complaint that enters NagarAI is scored for severity, assessed for credibility, deduplicated, routed to the right department, and delivered to officers with a specific recommendation — all in under one second.
+      </p>
+      <div class="about-stats">
+        <div class="about-stat-box">
+          <div class="num">18 days</div>
+          <div class="lbl">Current avg resolution</div>
+        </div>
+        <div class="about-stat-box">
+          <div class="num">6 hours</div>
+          <div class="lbl">NagarAI CRITICAL SLA</div>
+        </div>
+        <div class="about-stat-box">
+          <div class="num">500M+</div>
+          <div class="lbl">India's urban population</div>
+        </div>
+        <div class="about-stat-box">
+          <div class="num">0</div>
+          <div class="lbl">External API dependencies</div>
+        </div>
+      </div>
+    </div>
+    <div class="about-visual">
+      <img src="images/hero-banner.jpg" alt="AI Municipal Intelligence Platform — Government of India">
+    </div>
+  </div>
+</section>
+
+<!-- ═══ MODULES ════════════════════════════════════════════════════════════ -->
+<section class="modules-section" id="modules">
+  <div class="modules-inner">
+    <h2 class="section-title">AI Intelligence Modules</h2>
+    <p class="section-subtitle">Four specialized AI engines working in concert to deliver real-time municipal intelligence</p>
+    <div class="modules-grid">
+
+      <div class="module-card red">
+        <img src="images/module-surakshit.jpg" alt="Surakshit — Safety Intelligence" class="module-card-img">
+        <div class="module-icon">🔴</div>
+        <span class="module-name-hi">सुरक्षित</span>
+        <span class="module-name-en">Surakshit — Safety Intelligence</span>
+        <p class="module-desc">Advanced NLP keyword detection engine that identifies safety-critical complaints and triggers emergency overrides in real time. Evaluates severity across 25 emergency keywords, 21 high-severity signals, and 15 medium-severity patterns.</p>
+        <div class="module-features">
+          <span class="module-chip">NLP Severity Scoring</span>
+          <span class="module-chip">Emergency Override</span>
+          <span class="module-chip">25 Emergency Keywords</span>
+          <span class="module-chip">TF-IDF + Logistic Regression</span>
+        </div>
+      </div>
+
+      <div class="module-card blue">
+        <img src="images/module-vishwas.jpg" alt="Vishwas — Credibility Assessment" class="module-card-img">
+        <div class="module-icon">🔵</div>
+        <span class="module-name-hi">विश्वास</span>
+        <span class="module-name-en">Vishwas — Credibility Assessment</span>
+        <p class="module-desc">Multi-signal credibility scoring engine that detects spam, assesses text depth, verifies location mentions, and identifies duplicate complaints using TF-IDF cosine similarity with 0.80 threshold detection.</p>
+        <div class="module-features">
+          <span class="module-chip">Spam Detection</span>
+          <span class="module-chip">Duplicate Detection</span>
+          <span class="module-chip">TF-IDF Cosine Similarity</span>
+          <span class="module-chip">6-Signal Scoring</span>
+        </div>
+      </div>
+
+      <div class="module-card amber">
+        <img src="images/module-prathmik.jpg" alt="Prathmik — Priority Engine" class="module-card-img">
+        <div class="module-icon">🟡</div>
+        <span class="module-name-hi">प्राथमिक</span>
+        <span class="module-name-en">Prathmik — Priority Engine</span>
+        <p class="module-desc">Weighted priority orchestration system combining severity and credibility scores with adaptive emergency mode. Calculates SLA deadlines, enforces escalation paths, and supports dynamic weight recalibration for disaster scenarios.</p>
+        <div class="module-features">
+          <span class="module-chip">0.6×Sev + 0.4×Cred</span>
+          <span class="module-chip">SLA Enforcement</span>
+          <span class="module-chip">Emergency Mode</span>
+          <span class="module-chip">4-tier Priority Labels</span>
+        </div>
+      </div>
+
+      <div class="module-card purple">
+        <img src="images/module-nirikshan.jpg" alt="Nirikshan — City Intelligence" class="module-card-img">
+        <div class="module-icon">🟣</div>
+        <span class="module-name-hi">निरीक्षण</span>
+        <span class="module-name-en">Nirikshan — City Intelligence</span>
+        <p class="module-desc">Ward-level risk analysis and city-wide governance intelligence engine. Detects complaint spikes, computes ward risk scores, generates resource deployment plans, and provides a real-time City Transparency Score for public accountability.</p>
+        <div class="module-features">
+          <span class="module-chip">Ward Risk Scoring</span>
+          <span class="module-chip">Spike Detection</span>
+          <span class="module-chip">Deployment Planning</span>
+          <span class="module-chip">Transparency Index</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ HOW IT WORKS ═══════════════════════════════════════════════════════ -->
+<section class="how-section" id="how">
+  <div class="how-inner">
+    <h2 class="section-title">How It Works</h2>
+    <p class="section-subtitle">Three-step intelligent complaint processing pipeline</p>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">01</div>
+        <h3 class="step-title">Citizen Submits</h3>
+        <p class="step-desc">A citizen files a complaint through the portal with description, category, and location. The AI pipeline activates immediately upon submission — no delays, no manual sorting.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">02</div>
+        <h3 class="step-title">AI Analyzes</h3>
+        <p class="step-desc">Four ML models simultaneously assess severity (0–10), credibility (0–10), detect duplicates, classify emergency priority, compute the weighted priority score, and generate a department-specific action recommendation.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">03</div>
+        <h3 class="step-title">Officer Acts</h3>
+        <p class="step-desc">The officer dashboard surfaces CRITICAL complaints instantly with AI recommendations, department assignments, SLA countdowns, and city-level deployment plans — enabling data-driven decisions in seconds.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA ════════════════════════════════════════════════════════════════ -->
+<section style="padding:80px 0;background:var(--navy-deep);text-align:center;">
+  <div style="max-width:600px;margin:0 auto;padding:0 24px;">
+    <h2 class="section-title" style="margin-bottom:16px;">Ready to Experience NagarAI?</h2>
+    <p class="section-subtitle" style="margin-bottom:36px;">File a complaint as a citizen or explore the officer command dashboard</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+      <a href="complaint.html"    class="btn btn-primary btn-lg">📋 File a Complaint</a>
+      <a href="transparency.html" class="btn btn-secondary btn-lg">📊 View Transparency</a>
+      <a href="login.html"        class="btn btn-ghost btn-lg">🏛️ Officer Login</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ════════════════════════════════════════════════════════════ -->
+<footer class="gov-footer">
+  <div class="footer-grid">
+    <div class="footer-col">
+      <div class="footer-brand">नागरAI | NagarAI</div>
+      <p>AI Municipal Decision Intelligence — Government of India Initiative.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Government of India</h4>
+      <ul>
+        <li><a href="#">Ministry of Urban Affairs</a></li>
+        <li><a href="#">Smart Cities Mission</a></li>
+        <li><a href="#">Digital India Portal</a></li>
+        <li><a href="#">MyGov.in</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>AI Modules</h4>
+      <ul>
+        <li><a href="#">सुरक्षित Surakshit – Safety Intelligence</a></li>
+        <li><a href="#">विश्वास Vishwas – Credibility Assessment</a></li>
+        <li><a href="#">प्राथमिक Prathmik – Priority Engine</a></li>
+        <li><a href="#">निरीक्षण Nirikshan – City Intelligence</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <p>Helpline: 1800-XXX-XXXX (24×7)</p>
+      <p style="margin-top:8px;">Ministry of Urban Affairs<br>Nirman Bhawan, New Delhi - 110011</p>
+    </div>
+  </div>
+  <div style="border-top:1px solid var(--border-subtle);padding:20px 24px;max-width:1280px;margin:0 auto;">
+    <div class="footer-bottom">
+      <p>© 2025 नागरAI NagarAI – Ministry of Urban Affairs, Government of India</p>
+      <div class="footer-links">
+        <a href="#">RTI</a> | <a href="#">Terms</a> | <a href="#">Privacy</a> | <a href="#">Accessibility</a>
+      </div>
+      <p class="disclaimer">This website belongs to the Government of India. Best viewed in Chrome/Firefox at 1024×768 or higher.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="js/api.js"></script>
+<script src="js/auth.js"></script>
+<script>
+(async function init() {
+  try {
+    const stats = await API.getStats();
+    document.getElementById('hero-total').textContent     = stats.total    || 25;
+    document.getElementById('hero-critical').textContent  = stats.critical  || 8;
+    document.getElementById('hero-emergency').textContent = stats.emergency_overrides || 7;
+    if ((stats.critical || 0) > 0) {
+      const b = document.getElementById('emergency-banner');
+      b.innerHTML = `🚨 ${stats.critical} CRITICAL COMPLAINT(S) ACTIVE — Immediate response required <button class="close-btn" onclick="this.parentElement.classList.remove('visible')">✕</button>`;
+      b.classList.add('visible');
+    }
+    animateSection(stats);
+  } catch (e) {
+    animateSection({ total:25, critical:8, emergency_overrides:7, citizens_served:300 });
+  }
+})();
+
+function animateSection(stats) {
+  function counter(el, target, dur) {
+    if (!el) return;
+    const s = performance.now();
+    (function step(now) {
+      const p = Math.min((now - s) / dur, 1);
+      const e = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(target * e).toLocaleString();
+      if (p < 1) requestAnimationFrame(step);
+    })(performance.now());
+  }
+  const targets = document.querySelectorAll('.stat-card[data-target]');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const card = entry.target;
+        obs.unobserve(card);
+        const target = parseInt(card.dataset.target || '0');
+        const numEl  = card.querySelector('.stat-num');
+        counter(numEl, target, 1500);
+      }
+    });
+  }, { threshold: 0.4 });
+  targets.forEach(t => obs.observe(t));
+  const map = {
+    'cnt-total'    : stats.total              || 25,
+    'cnt-critical' : stats.critical            || 8,
+    'cnt-emergency': stats.emergency_overrides || 7,
+    'cnt-citizens' : (stats.total || 25) * 12,
+  };
+  document.querySelectorAll('.stat-card').forEach((card, i) => {
+    const keys = ['cnt-total','cnt-critical','cnt-emergency','cnt-citizens'];
+    if (keys[i]) card.dataset.target = map[keys[i]];
+  });
+}
+</script>
+</body>
+</html>

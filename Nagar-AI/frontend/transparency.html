@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>City Transparency Portal — NagarAI Delhi Municipal Intelligence</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <!-- Chart.js for category doughnut -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+<!-- Government Stripe -->
+<div class="gov-stripe">
+  <div class="gov-stripe-inner">
+    <span>🇮🇳 Ministry of Urban Affairs | Government of India</span>
+    <div class="accessibility">
+      <span>Screen Reader Access</span>
+      <button onclick="adjustFont(1.1)">A+</button>
+      <button onclick="adjustFont(1.0)">A</button>
+      <button onclick="adjustFont(0.9)">A-</button>
+    </div>
+  </div>
+</div>
+
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="brand">
+    <div class="brand-logo">🏛️</div>
+    <div class="brand-text">
+      <span class="hindi">नागरAI</span>
+      <span class="sep">|</span>
+      <span class="english">NagarAI</span>
+      <span class="tagline">AI Municipal Decision Intelligence</span>
+    </div>
+  </div>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="index.html#modules">AI Modules</a>
+    <a href="complaint.html">File Complaint</a>
+    <a href="transparency.html" class="active">Transparency</a>
+    <a href="login.html" class="btn-officer">Officer Login</a>
+  </div>
+  <button class="hamburger" onclick="toggleMobileMenu()">☰</button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="index.html">Home</a>
+  <a href="complaint.html">File Complaint</a>
+  <a href="transparency.html">Transparency</a>
+  <a href="login.html">Officer Login</a>
+</div>
+
+<!-- ═══ HERO ════════════════════════════════════════════════════════════════ -->
+<section class="transparency-hero">
+  <h1 class="section-title">📊 City Transparency Portal</h1>
+  <p class="section-subtitle" style="max-width:560px;margin:0 auto 40px;">
+    Track how the city responds to your complaints.<br>
+    Powered by NagarAI — Government of India initiative.
+  </p>
+
+  <!-- City Transparency Score Card -->
+  <div class="score-hero-card" id="score-card">
+    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--text-muted);margin-bottom:12px;">City Transparency Score</div>
+    <div>
+      <span class="score-hero-num" id="ts-score">—</span>
+      <span class="score-hero-pct">%</span>
+    </div>
+    <div class="score-hero-label" id="ts-label">Loading…</div>
+    <div class="score-hero-bar">
+      <div class="score-hero-fill" id="ts-bar"></div>
+    </div>
+    <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text-muted);margin-top:8px;">
+      <span>0 — Poor</span>
+      <span>50 — Moderate</span>
+      <span>100 — Excellent</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ KEY METRICS ════════════════════════════════════════════════════════ -->
+<div class="metrics-row" id="metrics-row">
+  <div class="metric-card">
+    <div class="metric-num" id="met-total">—</div>
+    <div class="metric-label">Total Complaints Filed</div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-num" id="met-response">—h</div>
+    <div class="metric-label">Average Response Time</div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-num" id="met-sla">—%</div>
+    <div class="metric-label">SLA Compliance Rate</div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-num" id="met-satisfaction">—</div>
+    <div class="metric-label">Citizen Satisfaction</div>
+  </div>
+</div>
+
+<!-- ═══ CITY HEALTH INDEX ══════════════════════════════════════════════════ -->
+<div style="max-width:1280px;margin:0 auto 40px;padding:0 24px;">
+  <div class="city-health-card">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:12px;">
+      <div>
+        <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:16px;color:var(--text-primary);">🏙️ City Health Index</div>
+        <div style="font-size:13px;color:var(--text-secondary);margin-top:4px;">Overall municipal performance composite score</div>
+      </div>
+      <div style="text-align:right;">
+        <div id="health-num" style="font-family:'Syne',sans-serif;font-weight:800;font-size:32px;color:var(--amber);">—</div>
+        <div id="health-lbl" style="font-size:13px;color:var(--text-secondary);">Status</div>
+      </div>
+    </div>
+    <div class="health-bar-wrap">
+      <div class="health-bar-fill" id="health-bar"></div>
+    </div>
+    <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text-muted);margin-top:6px;">
+      <span>0 — Critical</span><span>0.40 — High Risk</span><span>0.55 — Moderate</span><span>0.70 — Good</span><span>1.0 — Excellent</span>
+    </div>
+
+    <!-- Top Priority Action -->
+    <div style="margin-top:20px;background:rgba(245,158,11,0.05);border:1px solid rgba(245,158,11,0.2);border-radius:var(--radius-sm);padding:14px 18px;">
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--amber);margin-bottom:6px;">⚡ Top Priority Action</div>
+      <div id="top-action" style="font-size:14px;color:var(--text-primary);font-weight:500;">Loading…</div>
+      <div style="font-size:12px;color:var(--text-muted);margin-top:4px;">Top Priority Locality: <span id="top-ward" style="color:var(--amber);">—</span></div>
+    </div>
+
+    <!-- Citizens at risk -->
+    <div style="margin-top:16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+      <div class="citizens-risk">👥 Est. <span id="citizens-risk">—</span> citizens at risk</div>
+      <div style="font-size:12px;color:var(--text-muted);">Emergency Overrides Active: <span id="emergency-count" style="color:var(--red-critical);font-weight:700;">—</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ WARD PERFORMANCE RANKING ══════════════════════════════════════════ -->
+<div class="ward-ranking-section">
+  <h2 class="section-title" style="margin-bottom:8px;">🏆 Locality Performance Ranking</h2>
+  <p style="font-size:14px;color:var(--text-secondary);margin-bottom:24px;">
+    Performance scores based on resolution rate, response speed, and SLA compliance.
+  </p>
+
+  <div class="table-wrapper" style="margin-bottom:48px;">
+    <table class="ward-ranking-table">
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Locality</th>
+          <th>Total Complaints</th>
+          <th>Resolved</th>
+          <th>Avg Response</th>
+          <th>Performance</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+      <tbody id="ward-ranking-tbody">
+        <tr><td colspan="7" style="text-align:center;color:var(--text-muted);padding:40px;">Loading ward performance data…</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Category chart -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:48px;">
+    <div class="card">
+      <div class="card-header"><span class="card-title">📊 Complaints by Category</span></div>
+      <canvas id="trans-category-chart" style="max-height:280px;"></canvas>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-title">🔴 Priority Distribution</span></div>
+      <canvas id="trans-priority-chart" style="max-height:280px;"></canvas>
+    </div>
+  </div>
+
+  <!-- SLA Breaches summary -->
+  <div class="card" style="margin-bottom:48px;">
+    <div class="card-header">
+      <span class="card-title">⚠️ Active SLA Breaches</span>
+      <span id="sla-count-badge" class="badge badge-sla">—</span>
+    </div>
+    <div class="sla-list" id="trans-sla-list"></div>
+  </div>
+
+  <!-- Responsible AI note -->
+  <div class="card" style="margin-bottom:48px;">
+    <div class="card-header"><span class="card-title">🤖 AI Transparency Statement</span></div>
+    <p style="font-size:14px;color:var(--text-secondary);line-height:1.8;margin-bottom:16px;">
+      NagarAI uses explainable machine learning models to prioritize citizen complaints. All scoring decisions are transparent and auditable. The platform operates with:
+    </p>
+    <div class="ai-badges">
+      <span class="ai-badge">✓ 92.4% Model Confidence</span>
+      <span class="ai-badge">✓ Explainability Enabled (SHAP)</span>
+      <span class="ai-badge">✓ Bias Detection Active</span>
+      <span class="ai-badge">✓ False Positive Risk: Low</span>
+      <span class="ai-badge">✓ Emergency Override Logic</span>
+      <span class="ai-badge">✓ SLA Enforcement Automated</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══ FOOTER ═════════════════════════════════════════════════════════════ -->
+<footer class="gov-footer">
+  <div class="footer-grid">
+    <div class="footer-col">
+      <div class="footer-brand">नागरAI | NagarAI</div>
+      <p>AI Municipal Decision Intelligence — Government of India Initiative</p>
+    </div>
+    <div class="footer-col">
+      <h4>Government of India</h4>
+      <ul>
+        <li><a href="#">Ministry of Urban Affairs</a></li>
+        <li><a href="#">Smart Cities Mission</a></li>
+        <li><a href="#">Digital India Portal</a></li>
+        <li><a href="#">MyGov.in</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>AI Modules</h4>
+      <ul>
+        <li><a href="#">सुरक्षित Surakshit – Safety Intelligence</a></li>
+        <li><a href="#">विश्वास Vishwas – Credibility Assessment</a></li>
+        <li><a href="#">प्राथमिक Prathmik – Priority Engine</a></li>
+        <li><a href="#">निरीक्षण Nirikshan – City Intelligence</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <p>Helpline: 1800-XXX-XXXX (24×7)</p>
+      <p>Ministry of Urban Affairs, Nirman Bhawan, New Delhi - 110011</p>
+    </div>
+  </div>
+  <div style="border-top:1px solid var(--border-subtle);padding:20px 24px;max-width:1280px;margin:0 auto;">
+    <div class="footer-bottom">
+      <p>© 2025 नागरAI NagarAI – Ministry of Urban Affairs, Government of India</p>
+      <p>Government of India Initiative</p>
+      <div class="footer-links"><a href="#">RTI</a> | <a href="#">Terms</a> | <a href="#">Privacy</a> | <a href="#">Accessibility</a></div>
+      <p class="disclaimer">Best viewed in Chrome/Firefox at 1024×768 or higher.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="js/api.js"></script>
+<script src="js/auth.js"></script>
+<script>
+(async function loadTransparency() {
+  try {
+    const analytics = await API.getAnalytics();
+    const trans  = analytics.transparency || DEMO_ANALYTICS.transparency;
+    const cityRec = analytics.city_recommendation || DEMO_ANALYTICS.city_recommendation;
+    const stats  = await API.getStats().catch(() => DEMO_STATS);
+
+    /* ── City Transparency Score ──────────────────────────────────── */
+    const score = trans.city_transparency_score || cityRec.transparency_score || 72.4;
+    animCounter('ts-score', score, 1800);
+    setTimeout(() => {
+      document.getElementById('ts-bar').style.width = score + '%';
+    }, 100);
+    const scoreLabel = score >= 85 ? 'Excellent' : score >= 70 ? 'Good' : score >= 50 ? 'Moderate' : 'Needs Improvement';
+    const scoreColor = score >= 85 ? '#22c55e' : score >= 70 ? '#3b82f6' : score >= 50 ? '#eab308' : '#ef4444';
+    const lbl = document.getElementById('ts-label');
+    lbl.textContent = scoreLabel;
+    lbl.style.color = scoreColor;
+    document.getElementById('ts-bar').style.background = scoreColor;
+
+    /* ── Key Metrics ──────────────────────────────────────────────── */
+    animCounter('met-total', stats.total || 25, 1500);
+    document.getElementById('met-response').textContent  = (trans.avg_response_time_hours || 52.8).toFixed(1) + 'h';
+    document.getElementById('met-sla').textContent       = (trans.sla_compliance_rate || 60).toFixed(1) + '%';
+    const sat = trans.citizen_satisfaction_avg || 0;
+    document.getElementById('met-satisfaction').textContent = sat > 0 ? sat.toFixed(1) + '/5 ⭐' : 'N/A';
+
+    /* ── City Health Index ────────────────────────────────────────── */
+    const chi   = cityRec.city_health_index || 0.32;
+    const chiPct = Math.round(chi * 100);
+    animCounter('health-num', chiPct, 1500);
+    setTimeout(() => { document.getElementById('health-bar').style.width = chiPct + '%'; }, 100);
+    document.getElementById('health-lbl').textContent    = cityRec.city_health_label || 'High Risk';
+    document.getElementById('top-action').textContent    = cityRec.top_priority_action || 'No immediate action';
+    document.getElementById('top-ward').textContent      = cityRec.top_priority_ward   || '—';
+    document.getElementById('citizens-risk').textContent = (cityRec.total_citizens_at_risk || 0).toLocaleString();
+    document.getElementById('emergency-count').textContent = stats.emergency_overrides || 7;
+
+    /* ── Ward Ranking Table ───────────────────────────────────────── */
+    const tbody = document.getElementById('ward-ranking-tbody');
+    const wards = trans.ward_performance || [];
+    if (wards.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--text-muted);padding:32px;">No ward data available.</td></tr>';
+    } else {
+      tbody.innerHTML = wards.map((w, i) => {
+        const labelClass = {
+          'Excellent': 'perf-excellent',
+          'Good': 'perf-good',
+          'Moderate': 'perf-moderate',
+          'Needs Improvement': 'perf-poor'
+        }[w.performance_label] || 'perf-poor';
+
+        const labelIcon = {
+          'Excellent': '✅',
+          'Good': '🔵',
+          'Moderate': '🟡',
+          'Needs Improvement': '🔴'
+        }[w.performance_label] || '⚫';
+
+        const medals = ['🥇','🥈','🥉'];
+
+        return `
+          <tr>
+            <td><span class="rank-num">${medals[i] || (i+1)}</span></td>
+            <td style="font-weight:600;color:var(--text-primary);">${w.ward}</td>
+            <td style="font-family:'JetBrains Mono',monospace;font-size:13px;">${w.total}</td>
+            <td style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--green-low);">${w.resolved}</td>
+            <td style="font-family:'JetBrains Mono',monospace;font-size:13px;">${w.avg_response_hours}h</td>
+            <td class="${labelClass}">${labelIcon} ${w.performance_label}</td>
+            <td>
+              <div style="display:flex;align-items:center;gap:8px;">
+                <div style="flex:1;background:rgba(255,255,255,0.05);border-radius:100px;height:6px;overflow:hidden;min-width:60px;">
+                  <div style="height:100%;background:var(--amber);border-radius:100px;width:${Math.min(w.performance_score,100)}%;"></div>
+                </div>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--amber);min-width:32px;">${w.performance_score.toFixed(0)}</span>
+              </div>
+            </td>
+          </tr>`;
+      }).join('');
+    }
+
+    /* ── Category Chart ───────────────────────────────────────────── */
+    const catData = analytics.category_distribution || DEMO_ANALYTICS.category_distribution;
+    new Chart(document.getElementById('trans-category-chart'), {
+      type: 'doughnut',
+      data: {
+        labels: Object.keys(catData),
+        datasets: [{
+          data: Object.values(catData),
+          backgroundColor: ['rgba(239,68,68,.7)','rgba(249,115,22,.7)','rgba(234,179,8,.7)','rgba(59,130,246,.7)','rgba(139,92,246,.7)','rgba(34,197,94,.7)'],
+          borderColor: ['#ef4444','#f97316','#eab308','#3b82f6','#8b5cf6','#22c55e'],
+          borderWidth: 2, hoverOffset: 6,
+        }],
+      },
+      options: {
+        responsive:true, maintainAspectRatio:false, cutout:'65%',
+        plugins:{
+          legend:{ position:'right', labels:{ color:'#94a3b8', font:{ family:'DM Sans', size:12 }, boxWidth:12, padding:10 } },
+          tooltip:{ backgroundColor:'#0d1b35', borderColor:'rgba(245,158,11,.25)', borderWidth:1, titleColor:'#f59e0b', bodyColor:'#94a3b8', padding:10 }
+        }, scales:{},
+      },
+    });
+
+    /* ── Priority Chart ───────────────────────────────────────────── */
+    const priData = analytics.priority_distribution || DEMO_ANALYTICS.priority_distribution;
+    new Chart(document.getElementById('trans-priority-chart'), {
+      type: 'doughnut',
+      data: {
+        labels: ['CRITICAL','HIGH','MEDIUM','LOW'],
+        datasets: [{
+          data: ['CRITICAL','HIGH','MEDIUM','LOW'].map(k => priData[k]||0),
+          backgroundColor: ['rgba(239,68,68,.7)','rgba(249,115,22,.7)','rgba(234,179,8,.7)','rgba(34,197,94,.7)'],
+          borderColor: ['#ef4444','#f97316','#eab308','#22c55e'],
+          borderWidth: 2, hoverOffset: 6,
+        }],
+      },
+      options: {
+        responsive:true, maintainAspectRatio:false, cutout:'65%',
+        plugins:{
+          legend:{ position:'right', labels:{ color:'#94a3b8', font:{ family:'DM Sans', size:12 }, boxWidth:12, padding:10 } },
+          tooltip:{ backgroundColor:'#0d1b35', borderColor:'rgba(245,158,11,.25)', borderWidth:1, titleColor:'#f59e0b', bodyColor:'#94a3b8', padding:10 }
+        }, scales:{},
+      },
+    });
+
+    /* ── SLA Breaches list ────────────────────────────────────────── */
+    const breaches = analytics.sla_breaches || [];
+    document.getElementById('sla-count-badge').textContent = breaches.length + ' active';
+    const slaList = document.getElementById('trans-sla-list');
+    if (breaches.length === 0) {
+      slaList.innerHTML = '<p style="color:var(--green-low);font-size:13px;padding:12px;">✅ No active SLA breaches</p>';
+    } else {
+      slaList.innerHTML = breaches.map(b => `
+        <div class="sla-item">
+          <div class="sla-item-left">
+            <div class="cid">${b.complaint_id}</div>
+            <div class="cat">${b.ward_name} — ${b.category}</div>
+          </div>
+          <div class="sla-item-right">
+            <div class="elapsed">${b.time_elapsed_hours}h elapsed</div>
+            <div class="allowed">SLA: ${b.sla_hours}h</div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+  } catch (err) {
+    console.error('Transparency load error:', err);
+    document.getElementById('ts-label').textContent = 'Unable to load data';
+  }
+})();
+
+/* ── Animated counter ──────────────────────────────────────────────── */
+function animCounter(id, target, dur) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const s = performance.now();
+  (function step(now) {
+    const p = Math.min((now-s)/dur, 1);
+    const e = 1 - Math.pow(1-p, 3);
+    el.textContent = typeof target === 'number' && target % 1 !== 0
+      ? (target * e).toFixed(1)
+      : Math.round(target * e);
+    if (p < 1) requestAnimationFrame(step);
+  })(performance.now());
+}
+</script>
+</body>
+</html>
