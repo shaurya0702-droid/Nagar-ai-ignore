@@ -144,8 +144,8 @@ def main():
     model = SeverityModel.__new__(SeverityModel)
     from sklearn.feature_extraction.text import TfidfVectorizer
     from sklearn.linear_model import LogisticRegression
-    model.vectorizer = TfidfVectorizer(max_features=500, ngram_range=(1, 2))
-    model.classifier = LogisticRegression(random_state=42, max_iter=1000)
+    model.vectorizer = TfidfVectorizer(max_features=500, ngram_range=(1, 2), sublinear_tf=True)
+    model.classifier = LogisticRegression(random_state=42, max_iter=1000, class_weight="balanced")
     model.is_trained = False
 
     # Override _get_training_data to use our CSV
