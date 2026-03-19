@@ -9,51 +9,21 @@ from typing import Optional
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# KEYWORD LISTS
+# KEYWORD LISTS (Loaded from config.yaml)
 # ─────────────────────────────────────────────────────────────────────────────
+import os
+import yaml
 
-EMERGENCY_KEYWORDS = [
-    "fire", "explosion", "gas leak", "flood", "collapse", "accident", "dead", "death",
-    "hospital", "ambulance", "electric shock", "short circuit", "drowning", "riot",
-    "violence", "shooting", "bomb", "bleeding", "unconscious", "sewage overflow",
-    "building collapse", "live wire", "toxic", "poisoning", "earthquake",
-]
+_CONFIG_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "config.yaml")
+with open(_CONFIG_PATH, "r", encoding="utf-8") as _f:
+    _cfg = yaml.safe_load(_f)
 
-HIGH_SEVERITY_KEYWORDS = [
-    "danger", "urgent", "emergency", "critical", "severe", "hazard", "attack",
-    "injury", "trapped", "smoke", "fire", "burst", "collapse", "overflow", "leak",
-    "broken", "crack", "fall", "exposed", "contamination", "threat",
-]
-
-MEDIUM_SEVERITY_KEYWORDS = [
-    "pothole", "garbage", "stench", "dark", "broken light", "water cut", "power cut",
-    "blocked", "damaged", "dirty", "smell", "noise", "dust", "missing", "repair needed",
-]
-
-LOW_SEVERITY_KEYWORDS = [
-    "request", "suggestion", "inconvenience", "minor", "small", "slight",
-    "improve", "please", "kindly", "maintenance",
-]
-
-SPAM_PATTERNS = [
-    r"^test",
-    r"testing",
-    r"^aaa+",
-    r"^[0-9]+$",
-    r"^(.)\1{4,}$",
-    r"^(hello|hi|hey)[\s!]*$",
-    r"^dummy",
-    r"^fake",
-]
-
-DEPARTMENT_MAP = {
-    "Emergency": "Disaster Management Cell",
-    "Garbage Issue": "Sanitation Department",
-    "Road Damage": "Public Works Department",
-    "Water Leakage": "Jal Board",
-    "Street Light Failure": "Electricity Department",
-    "Public Safety": "Municipal Security & Police Coordination",
-}
+EMERGENCY_KEYWORDS = _cfg.get("ml_keywords", {}).get("emergency", [])
+HIGH_SEVERITY_KEYWORDS = _cfg.get("ml_keywords", {}).get("high_severity", [])
+MEDIUM_SEVERITY_KEYWORDS = _cfg.get("ml_keywords", {}).get("medium_severity", [])
+LOW_SEVERITY_KEYWORDS = _cfg.get("ml_keywords", {}).get("low_severity", [])
+SPAM_PATTERNS = _cfg.get("ml_keywords", {}).get("spam_patterns", [])
+DEPARTMENT_MAP = _cfg.get("department_map", {})
 
 # Location indicator words
 _LOCATION_WORDS = [

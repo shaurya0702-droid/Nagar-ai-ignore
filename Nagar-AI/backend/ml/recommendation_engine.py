@@ -12,59 +12,26 @@ class RecommendationEngine:
     Transforms raw complaint data into decision-ready intelligence.
     """
 
-    RECOMMENDATION_TEMPLATES = {
-        "Emergency": {
-            "action": "Deploy emergency response team immediately to {ward}",
-            "base_impact": "Prevent potential disaster affecting {residents}+ residents",
-            "authority": "Disaster Management Cell",
-            "urgency": "IMMEDIATE",
-        },
-        "Garbage Issue": {
-            "action": "Deploy sanitation crew to {ward} within 4 hours",
-            "base_impact": "Reduce health hazard risk for {residents}+ residents",
-            "authority": "Sanitation Department",
-            "urgency": "SAME_DAY",
-        },
-        "Road Damage": {
-            "action": "Dispatch Public Works repair team to {ward}",
-            "base_impact": "Prevent accidents and restore safe traffic flow for {residents}+ commuters",
-            "authority": "Public Works Department",
-            "urgency": "WITHIN_48H",
-        },
-        "Water Leakage": {
-            "action": "Send Jal Board emergency plumbing unit to {ward}",
-            "base_impact": "Restore water supply and prevent contamination for {residents}+ households",
-            "authority": "Jal Board",
-            "urgency": "WITHIN_24H",
-        },
-        "Street Light Failure": {
-            "action": "Dispatch electrical maintenance crew to {ward}",
-            "base_impact": "Improve night safety for {residents}+ citizens, reduce crime risk",
-            "authority": "Electricity Department",
-            "urgency": "WITHIN_48H",
-        },
-        "Public Safety": {
-            "action": "Coordinate Municipal Security and Police patrol to {ward}",
-            "base_impact": "Ensure safety for {residents}+ residents in affected area",
-            "authority": "Municipal Security & Police Coordination",
-            "urgency": "WITHIN_24H",
-        },
-    }
+    import os
+    import yaml
+    
+    _CONFIG_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "config.yaml")
+    with open(_CONFIG_PATH, "r", encoding="utf-8") as _f:
+        _cfg = yaml.safe_load(_f)
 
-    # Fallback template for unknown categories
-    _DEFAULT_TEMPLATE = {
+    RECOMMENDATION_TEMPLATES = _cfg.get("recommendation_templates", {})
+    _DEFAULT_TEMPLATE = RECOMMENDATION_TEMPLATES.get("default", {
         "action": "Assign municipal officer to investigate and resolve issue in {ward}",
         "base_impact": "Address concern for {residents}+ affected residents",
         "authority": "General Administration",
         "urgency": "WITHIN_48H",
-    }
-
-    RESIDENT_ESTIMATES = {
+    })
+    RESIDENT_ESTIMATES = _cfg.get("resident_estimates", {
         "CRITICAL": 500,
         "HIGH": 200,
         "MEDIUM": 100,
         "LOW": 50,
-    }
+    })
 
     # ─────────────────────────────────────────────────────────────────────────
     # SINGLE COMPLAINT RECOMMENDATION

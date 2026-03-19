@@ -33,7 +33,7 @@ class CredibilityModel:
     """
 
     def __init__(self):
-        self.vectorizer = TfidfVectorizer(max_features=200, ngram_range=(1, 1))
+        self.vectorizer = TfidfVectorizer(max_features=500, ngram_range=(1, 2), sublinear_tf=True)
         self._spam_matrix = None
         self._genuine_texts = []
         self._fit_spam_detector()
@@ -43,58 +43,31 @@ class CredibilityModel:
     # ─────────────────────────────────────────────────────────────────────────
 
     def _fit_spam_detector(self):
-        spam_texts = [
-            "test test test",
-            "aaaaaaaaa",
-            "hello",
-            "dummy complaint",
-            "fake report nothing happened",
-            "1234567890",
-            "zzzzz",
-            "hi hi hi",
-            "testing testing",
-            "please please please please please",
-            "nothing",
-            "xxx xxx xxx",
-            "abc abc abc",
-            "hey hey",
-            "fake fake fake",
-            "test123",
-            "qqqqq",
-            "lol lol lol",
-            "blah blah blah",
-            "dummy dummy",
-        ]
-
-        self._genuine_texts = [
-            "Garbage pile has been growing for 3 days near main market stench unbearable",
-            "Water pipe burst on main road flooding for 6 hours supply disrupted 200 households",
-            "Large pothole on arterial road caused accident today vehicle damaged urgent repair",
-            "All 12 street lights on sector 7 non-functional for 7 days women unsafe",
-            "Illegal construction blocking emergency exit fire escape completely blocked elderly",
-            "Underground water pipe leaking near junction sinkhole risk near misses",
-            "Road collapse near bridge approach large section caved in traffic diverted",
-            "Electric pole fell parked cars live wires exposed people gathering dangerously",
-            "Water meter leaking ward 5 colony wastage reported twice meter needs replacement",
-            "Stray dogs attacking pedestrians near school 3 children bitten this week",
-            "Bridge approach road developed dangerous cracks heavy vehicles structural assessment",
-            "Sewage overflow flooding residential area raw sewage entering homes children elderly",
-            "Garbage collection stopped 8 days multiple residents complained bins overflowing",
-            "Main water supply pipeline exposed road work contamination risk quality complaints",
-            "Street light pole leaning dangerously lane 4 risk of falling",
-            "Ward 1 sector 3 road severe potholes after rains 3 accidents impassable two-wheelers",
-            "Water leakage overhead tank building 2 days overflow wasting thousands liters",
-            "Abandoned building ward 6 used by miscreants residents afraid illegal activities",
-            "Massive garbage fire dumpyard toxic smoke residential area respiratory problems",
-            "Emergency water tanker required main supply cut 48 hours hospital running out",
-        ]
-
-        all_texts = spam_texts + self._genuine_texts
+        import os
+        import json
+        json_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "credibility_training.json")
+        spam_texts, genuine_texts = [], []
+        try:
+            with open(json_path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+                spam_texts = data.get("spam_texts", [])
+                genuine_texts = data.get("genuine_texts", [])
+        except Exception as e:
+            print(f"Warning: Could not load credibility training data: {e}")
+            
+        self._genuine_texts = genuine_texts
+        all_texts = spam_texts + genuine_texts
+        if not all_texts:
+            return  # Safety fallback
+            
         cleaned = [clean_text(t) for t in all_texts]
         self.vectorizer.fit(cleaned)
-        # Store genuine complaint matrix for duplicate detection
+        
         genuine_cleaned = [clean_text(t) for t in self._genuine_texts]
-        self._genuine_matrix = self.vectorizer.transform(genuine_cleaned)
+        if genuine_cleaned:
+            self._genuine_matrix = self.vectorizer.transform(genuine_cleaned)
+        else:
+            self._genuine_matrix = None
 
     # ─────────────────────────────────────────────────────────────────────────
     # PREDICT  (main scoring)

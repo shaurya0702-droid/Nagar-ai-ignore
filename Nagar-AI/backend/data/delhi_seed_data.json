@@ -1,0 +1,3563 @@
+{
+    "zones": [
+        {
+            "id": 1,
+            "ward_name": "Connaught Place",
+            "latitude": 28.6315,
+            "longitude": 77.2167,
+            "description": "Central Business District"
+        },
+        {
+            "id": 2,
+            "ward_name": "Civil Lines",
+            "latitude": 28.681,
+            "longitude": 77.229,
+            "description": "North Delhi Administrative Zone"
+        },
+        {
+            "id": 3,
+            "ward_name": "Karol Bagh",
+            "latitude": 28.6514,
+            "longitude": 77.1907,
+            "description": "West Delhi Commercial Hub"
+        },
+        {
+            "id": 4,
+            "ward_name": "Rohini",
+            "latitude": 28.7384,
+            "longitude": 77.1172,
+            "description": "North-West Delhi Residential"
+        },
+        {
+            "id": 5,
+            "ward_name": "Dwarka",
+            "latitude": 28.5921,
+            "longitude": 77.046,
+            "description": "South-West Delhi Sector"
+        },
+        {
+            "id": 6,
+            "ward_name": "Lajpat Nagar",
+            "latitude": 28.57,
+            "longitude": 77.2373,
+            "description": "South Delhi Market Area"
+        },
+        {
+            "id": 7,
+            "ward_name": "Vasant Kunj",
+            "latitude": 28.5293,
+            "longitude": 77.1558,
+            "description": "South West Delhi Upscale Residential"
+        },
+        {
+            "id": 8,
+            "ward_name": "Chandni Chowk",
+            "latitude": 28.6505,
+            "longitude": 77.2303,
+            "description": "Old Delhi Historical Zone"
+        },
+        {
+            "id": 9,
+            "ward_name": "Okhla",
+            "latitude": 28.5552,
+            "longitude": 77.2828,
+            "description": "South East Delhi Industrial Hub"
+        },
+        {
+            "id": 10,
+            "ward_name": "Pitampura",
+            "latitude": 28.6981,
+            "longitude": 77.1388,
+            "description": "North-West Delhi Elite Residential"
+        }
+    ],
+    "officers": [
+        {
+            "name": "Officer Amit Sharma",
+            "email": "officer@nagarai.gov.in",
+            "role": "officer",
+            "ward_id": 3,
+            "password": "NagarAI@123"
+        },
+        {
+            "name": "Officer Priya Malhotra",
+            "email": "officer2@gov.in",
+            "role": "officer",
+            "ward_id": 2,
+            "password": "123456"
+        },
+        {
+            "name": "Officer Rahul Verma",
+            "email": "rahul.v@nagarai.gov.in",
+            "role": "officer",
+            "ward_id": 8,
+            "password": "password123"
+        },
+        {
+            "name": "Officer Sunita Rao",
+            "email": "sunita.r@nagarai.gov.in",
+            "role": "officer",
+            "ward_id": 5,
+            "password": "password123"
+        },
+        {
+            "name": "Officer Vivek Singh",
+            "email": "vivek.s@nagarai.gov.in",
+            "role": "officer",
+            "ward_id": 1,
+            "password": "password123"
+        }
+    ],
+    "complaints": [
+        {
+            "idx": 1,
+            "ward_id": 10,
+            "ward_name": "Pitampura",
+            "category": "Road Damage",
+            "text": "Broken footpaths in Pitampura making it hard for pedestrians. Multiple elderly have tripped.",
+            "status": "In Progress",
+            "sla_hrs": 24,
+            "elapsed": 39.3,
+            "severity": 3.7,
+            "credibility": 9.5,
+            "label": "MEDIUM",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Broken",
+                "footpaths",
+                "in"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 2,
+            "ward_id": 4,
+            "ward_name": "Rohini",
+            "category": "Road Damage",
+            "text": "Massive pothole causing accidents near Jama Masjid in Rohini. Motorbike damaged tonight.",
+            "status": "In Progress",
+            "sla_hrs": 72,
+            "elapsed": 14.8,
+            "severity": 7.2,
+            "credibility": 5.4,
+            "label": "HIGH",
+            "emergency": false,
+            "sla_breached": false,
+            "keywords": [
+                "Massive",
+                "pothole",
+                "causing"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 3,
+            "ward_id": 6,
+            "ward_name": "Lajpat Nagar",
+            "category": "Street Light Failure",
+            "text": "Park lighting in Lajpat Nagar not working, area totally unlit.",
+            "status": "Pending",
+            "sla_hrs": 6,
+            "elapsed": 92.6,
+            "severity": 7.9,
+            "credibility": 7.6,
+            "label": "HIGH",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Park",
+                "lighting",
+                "in"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 4,
+            "ward_id": 4,
+            "ward_name": "Rohini",
+            "category": "Road Damage",
+            "text": "Extensive potholes on the main road in Rohini. Causing huge traffic jams during rush hour.",
+            "status": "Pending",
+            "sla_hrs": 6,
+            "elapsed": 70.7,
+            "severity": 6.6,
+            "credibility": 5.5,
+            "label": "HIGH",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Extensive",
+                "potholes",
+                "on"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 5,
+            "ward_id": 5,
+            "ward_name": "Dwarka",
+            "category": "Public Safety",
+            "text": "Uncovered deep manhole in Dwarka. Someone could easily fall in at night.",
+            "status": "Pending",
+            "sla_hrs": 72,
+            "elapsed": 79.2,
+            "severity": 4.0,
+            "credibility": 7.4,
+            "label": "MEDIUM",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Uncovered",
+                "deep",
+                "manhole"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 6,
+            "ward_id": 9,
+            "ward_name": "Okhla",
+            "category": "Public Safety",
+            "text": "Abandoned building near Okhla market used for suspicious activities at night. Residents afraid.",
+            "status": "Pending",
+            "sla_hrs": 6,
+            "elapsed": 66.5,
+            "severity": 4.1,
+            "credibility": 6.6,
+            "label": "MEDIUM",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Abandoned",
+                "building",
+                "near"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 7,
+            "ward_id": 7,
+            "ward_name": "Vasant Kunj",
+            "category": "Garbage Issue",
+            "text": "Bins overflowing for a week outside the market in Vasant Kunj. Serious health hazard.",
+            "status": "Pending",
+            "sla_hrs": 48,
+            "elapsed": 88.6,
+            "severity": 2.5,
+            "credibility": 5.3,
+            "label": "LOW",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Bins",
+                "overflowing",
+                "for"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 8,
+            "ward_id": 5,
+            "ward_name": "Dwarka",
+            "category": "Emergency",
+            "text": "URGENT: Gas leak detected near Akshardham Temple in Dwarka. Multiple people complaining of dizziness.",
+            "status": "In Progress",
+            "sla_hrs": 6,
+            "elapsed": 39.9,
+            "severity": 9.2,
+            "credibility": 6.6,
+            "label": "CRITICAL",
+            "emergency": true,
+            "sla_breached": true,
+            "keywords": [
+                "URGENT:",
+                "Gas",
+                "leak"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 9,
+            "ward_id": 3,
+            "ward_name": "Karol Bagh",
+            "category": "Water Leakage",
+            "text": "Contaminated, foul-smelling water coming from taps in Karol Bagh. Health risk.",
+            "status": "Pending",
+            "sla_hrs": 72,
+            "elapsed": 95.7,
+            "severity": 4.1,
+            "credibility": 7.6,
+            "label": "MEDIUM",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Contaminated,",
+                "foul-smelling",
+                "water"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 10,
+            "ward_id": 9,
+            "ward_name": "Okhla",
+            "category": "Road Damage",
+            "text": "Extensive potholes on the main road in Okhla. Causing huge traffic jams during rush hour.",
+            "status": "In Progress",
+            "sla_hrs": 48,
+            "elapsed": 96.3,
+            "severity": 3.9,
+            "credibility": 8.6,
+            "label": "MEDIUM",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Extensive",
+                "potholes",
+                "on"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 11,
+            "ward_id": 10,
+            "ward_name": "Pitampura",
+            "category": "Water Leakage",
+            "text": "Wastage of thousands of liters of water due to broken municipal tap in Pitampura.",
+            "status": "In Progress",
+            "sla_hrs": 6,
+            "elapsed": 87.9,
+            "severity": 5.5,
+            "credibility": 8.7,
+            "label": "MEDIUM",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Wastage",
+                "of",
+                "thousands"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 12,
+            "ward_id": 4,
+            "ward_name": "Rohini",
+            "category": "Water Leakage",
+            "text": "Overhead tank leaking continuously for 3 days in Rohini public park.",
+            "status": "Pending",
+            "sla_hrs": 12,
+            "elapsed": 92.3,
+            "severity": 8.0,
+            "credibility": 6.9,
+            "label": "HIGH",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Overhead",
+                "tank",
+                "leaking"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 13,
+            "ward_id": 2,
+            "ward_name": "Civil Lines",
+            "category": "Street Light Failure",
+            "text": "Dim and flickering street lights in Civil Lines sector causing safety concerns for women commuting late.",
+            "status": "Pending",
+            "sla_hrs": 72,
+            "elapsed": 41.5,
+            "severity": 2.8,
+            "credibility": 6.7,
+            "label": "LOW",
+            "emergency": false,
+            "sla_breached": false,
+            "keywords": [
+                "Dim",
+                "and",
+                "flickering"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 14,
+            "ward_id": 1,
+            "ward_name": "Connaught Place",
+            "category": "Water Leakage",
+            "text": "Overhead tank leaking continuously for 3 days in Connaught Place public park.",
+            "status": "Pending",
+            "sla_hrs": 24,
+            "elapsed": 47.3,
+            "severity": 4.8,
+            "credibility": 9.5,
+            "label": "MEDIUM",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Overhead",
+                "tank",
+                "leaking"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 15,
+            "ward_id": 1,
+            "ward_name": "Connaught Place",
+            "category": "Road Damage",
+            "text": "Massive pothole causing accidents near Red Fort in Connaught Place. Motorbike damaged tonight.",
+            "status": "Pending",
+            "sla_hrs": 72,
+            "elapsed": 33.9,
+            "severity": 6.0,
+            "credibility": 5.3,
+            "label": "HIGH",
+            "emergency": false,
+            "sla_breached": false,
+            "keywords": [
+                "Massive",
+                "pothole",
+                "causing"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 16,
+            "ward_id": 5,
+            "ward_name": "Dwarka",
+            "category": "Garbage Issue",
+            "text": "Illegal garbage burning in an empty plot at Dwarka. Toxic smoke is affecting residents.",
+            "status": "In Progress",
+            "sla_hrs": 12,
+            "elapsed": 30.2,
+            "severity": 4.6,
+            "credibility": 5.6,
+            "label": "MEDIUM",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Illegal",
+                "garbage",
+                "burning"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 17,
+            "ward_id": 9,
+            "ward_name": "Okhla",
+            "category": "Garbage Issue",
+            "text": "Massive garbage pile accumulating near Chandni Chowk Market in Okhla. Rats and stray animals multiplying daily.",
+            "status": "Pending",
+            "sla_hrs": 72,
+            "elapsed": 85.6,
+            "severity": 6.9,
+            "credibility": 6.4,
+            "label": "HIGH",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Massive",
+                "garbage",
+                "pile"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 18,
+            "ward_id": 6,
+            "ward_name": "Lajpat Nagar",
+            "category": "Garbage Issue",
+            "text": "Stink from uncollected waste near Red Fort in Lajpat Nagar has made it impossible to breathe.",
+            "status": "Pending",
+            "sla_hrs": 72,
+            "elapsed": 21.2,
+            "severity": 8.5,
+            "credibility": 5.4,
+            "label": "CRITICAL",
+            "emergency": true,
+            "sla_breached": false,
+            "keywords": [
+                "Stink",
+                "from",
+                "uncollected"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 19,
+            "ward_id": 5,
+            "ward_name": "Dwarka",
+            "category": "Street Light Failure",
+            "text": "Park lighting in Dwarka not working, area totally unlit.",
+            "status": "In Progress",
+            "sla_hrs": 6,
+            "elapsed": 48.2,
+            "severity": 3.8,
+            "credibility": 6.1,
+            "label": "MEDIUM",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Park",
+                "lighting",
+                "in"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 20,
+            "ward_id": 9,
+            "ward_name": "Okhla",
+            "category": "Street Light Failure",
+            "text": "Wiring exposed at the base of the street light in Okhla. Risk of electric shock.",
+            "status": "Pending",
+            "sla_hrs": 24,
+            "elapsed": 78.5,
+            "severity": 6.7,
+            "credibility": 5.5,
+            "label": "HIGH",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Wiring",
+                "exposed",
+                "at"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 21,
+            "ward_id": 9,
+            "ward_name": "Okhla",
+            "category": "Public Safety",
+            "text": "Dengue hotspot: Stagnant water pool near Okhla has become a mosquito breeding ground. Multiple cases reported.",
+            "status": "Pending",
+            "sla_hrs": 48,
+            "elapsed": 85.6,
+            "severity": 2.7,
+            "credibility": 8.7,
+            "label": "LOW",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Dengue",
+                "hotspot:",
+                "Stagnant"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 22,
+            "ward_id": 4,
+            "ward_name": "Rohini",
+            "category": "Emergency",
+            "text": "Major fire outbreak at an apartment building in Rohini near Jama Masjid. Smoke spreading rapidly.",
+            "status": "Pending",
+            "sla_hrs": 24,
+            "elapsed": 54.7,
+            "severity": 9.9,
+            "credibility": 7.8,
+            "label": "CRITICAL",
+            "emergency": true,
+            "sla_breached": true,
+            "keywords": [
+                "Major",
+                "fire",
+                "outbreak"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 23,
+            "ward_id": 9,
+            "ward_name": "Okhla",
+            "category": "Street Light Failure",
+            "text": "Pole leaning dangerously ready to collapse in Okhla near Jantar Mantar.",
+            "status": "Pending",
+            "sla_hrs": 72,
+            "elapsed": 53.8,
+            "severity": 2.5,
+            "credibility": 9.0,
+            "label": "LOW",
+            "emergency": false,
+            "sla_breached": false,
+            "keywords": [
+                "Pole",
+                "leaning",
+                "dangerously"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 24,
+            "ward_id": 8,
+            "ward_name": "Chandni Chowk",
+            "category": "Public Safety",
+            "text": "Dengue hotspot: Stagnant water pool near Chandni Chowk has become a mosquito breeding ground. Multiple cases reported.",
+            "status": "Pending",
+            "sla_hrs": 48,
+            "elapsed": 95.5,
+            "severity": 4.2,
+            "credibility": 7.6,
+            "label": "MEDIUM",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Dengue",
+                "hotspot:",
+                "Stagnant"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 25,
+            "ward_id": 1,
+            "ward_name": "Connaught Place",
+            "category": "Road Damage",
+            "text": "Large structural crack developed on the flyover approach in Connaught Place. Needs urgent assessment.",
+            "status": "In Progress",
+            "sla_hrs": 12,
+            "elapsed": 69.1,
+            "severity": 3.0,
+            "credibility": 7.8,
+            "label": "LOW",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Large",
+                "structural",
+                "crack"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 26,
+            "ward_id": 3,
+            "ward_name": "Karol Bagh",
+            "category": "Garbage Issue",
+            "text": "Bins overflowing for a week outside the market in Karol Bagh. Serious health hazard.",
+            "status": "Pending",
+            "sla_hrs": 24,
+            "elapsed": 10.8,
+            "severity": 4.6,
+            "credibility": 8.2,
+            "label": "MEDIUM",
+            "emergency": false,
+            "sla_breached": false,
+            "keywords": [
+                "Bins",
+                "overflowing",
+                "for"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 27,
+            "ward_id": 9,
+            "ward_name": "Okhla",
+            "category": "Water Leakage",
+            "text": "Wastage of thousands of liters of water due to broken municipal tap in Okhla.",
+            "status": "Pending",
+            "sla_hrs": 24,
+            "elapsed": 97.2,
+            "severity": 3.0,
+            "credibility": 9.3,
+            "label": "LOW",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Wastage",
+                "of",
+                "thousands"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 28,
+            "ward_id": 6,
+            "ward_name": "Lajpat Nagar",
+            "category": "Street Light Failure",
+            "text": "Pole leaning dangerously ready to collapse in Lajpat Nagar near Lotus Temple.",
+            "status": "Pending",
+            "sla_hrs": 72,
+            "elapsed": 35.5,
+            "severity": 6.3,
+            "credibility": 8.5,
+            "label": "HIGH",
+            "emergency": false,
+            "sla_breached": false,
+            "keywords": [
+                "Pole",
+                "leaning",
+                "dangerously"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 29,
+            "ward_id": 2,
+            "ward_name": "Civil Lines",
+            "category": "Water Leakage",
+            "text": "Contaminated, foul-smelling water coming from taps in Civil Lines. Health risk.",
+            "status": "In Progress",
+            "sla_hrs": 6,
+            "elapsed": 99.8,
+            "severity": 6.4,
+            "credibility": 7.1,
+            "label": "HIGH",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Contaminated,",
+                "foul-smelling",
+                "water"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 30,
+            "ward_id": 10,
+            "ward_name": "Pitampura",
+            "category": "Garbage Issue",
+            "text": "Massive garbage pile accumulating near Chandni Chowk Market in Pitampura. Rats and stray animals multiplying daily.",
+            "status": "Pending",
+            "sla_hrs": 72,
+            "elapsed": 37.5,
+            "severity": 2.5,
+            "credibility": 6.9,
+            "label": "LOW",
+            "emergency": false,
+            "sla_breached": false,
+            "keywords": [
+                "Massive",
+                "garbage",
+                "pile"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 31,
+            "ward_id": 7,
+            "ward_name": "Vasant Kunj",
+            "category": "Public Safety",
+            "text": "Abandoned building near Vasant Kunj market used for suspicious activities at night. Residents afraid.",
+            "status": "In Progress",
+            "sla_hrs": 6,
+            "elapsed": 34.4,
+            "severity": 2.6,
+            "credibility": 7.2,
+            "label": "LOW",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Abandoned",
+                "building",
+                "near"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 32,
+            "ward_id": 10,
+            "ward_name": "Pitampura",
+            "category": "Street Light Failure",
+            "text": "Dim and flickering street lights in Pitampura sector causing safety concerns for women commuting late.",
+            "status": "Pending",
+            "sla_hrs": 48,
+            "elapsed": 4.7,
+            "severity": 8.0,
+            "credibility": 8.4,
+            "label": "HIGH",
+            "emergency": false,
+            "sla_breached": false,
+            "keywords": [
+                "Dim",
+                "and",
+                "flickering"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 33,
+            "ward_id": 6,
+            "ward_name": "Lajpat Nagar",
+            "category": "Street Light Failure",
+            "text": "Park lighting in Lajpat Nagar not working, area totally unlit.",
+            "status": "Pending",
+            "sla_hrs": 72,
+            "elapsed": 20.5,
+            "severity": 6.0,
+            "credibility": 9.2,
+            "label": "HIGH",
+            "emergency": false,
+            "sla_breached": false,
+            "keywords": [
+                "Park",
+                "lighting",
+                "in"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 34,
+            "ward_id": 6,
+            "ward_name": "Lajpat Nagar",
+            "category": "Street Light Failure",
+            "text": "Park lighting in Lajpat Nagar not working, area totally unlit.",
+            "status": "Pending",
+            "sla_hrs": 6,
+            "elapsed": 62.6,
+            "severity": 2.9,
+            "credibility": 8.5,
+            "label": "LOW",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Park",
+                "lighting",
+                "in"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 35,
+            "ward_id": 2,
+            "ward_name": "Civil Lines",
+            "category": "Street Light Failure",
+            "text": "Park lighting in Civil Lines not working, area totally unlit.",
+            "status": "In Progress",
+            "sla_hrs": 24,
+            "elapsed": 57.4,
+            "severity": 4.7,
+            "credibility": 6.2,
+            "label": "MEDIUM",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Park",
+                "lighting",
+                "in"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 36,
+            "ward_id": 10,
+            "ward_name": "Pitampura",
+            "category": "Public Safety",
+            "text": "Stray monkey attacks increasing near India Gate in Pitampura. 5 children injured this week.",
+            "status": "Pending",
+            "sla_hrs": 12,
+            "elapsed": 71.2,
+            "severity": 4.3,
+            "credibility": 8.9,
+            "label": "MEDIUM",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Stray",
+                "monkey",
+                "attacks"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 37,
+            "ward_id": 10,
+            "ward_name": "Pitampura",
+            "category": "Road Damage",
+            "text": "Large structural crack developed on the flyover approach in Pitampura. Needs urgent assessment.",
+            "status": "Pending",
+            "sla_hrs": 24,
+            "elapsed": 52.2,
+            "severity": 4.3,
+            "credibility": 5.4,
+            "label": "MEDIUM",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Large",
+                "structural",
+                "crack"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 38,
+            "ward_id": 8,
+            "ward_name": "Chandni Chowk",
+            "category": "Garbage Issue",
+            "text": "Bins overflowing for a week outside the market in Chandni Chowk. Serious health hazard.",
+            "status": "In Progress",
+            "sla_hrs": 48,
+            "elapsed": 3.5,
+            "severity": 6.9,
+            "credibility": 9.3,
+            "label": "HIGH",
+            "emergency": false,
+            "sla_breached": false,
+            "keywords": [
+                "Bins",
+                "overflowing",
+                "for"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 39,
+            "ward_id": 8,
+            "ward_name": "Chandni Chowk",
+            "category": "Road Damage",
+            "text": "Large structural crack developed on the flyover approach in Chandni Chowk. Needs urgent assessment.",
+            "status": "Pending",
+            "sla_hrs": 72,
+            "elapsed": 71.8,
+            "severity": 3.8,
+            "credibility": 9.3,
+            "label": "MEDIUM",
+            "emergency": false,
+            "sla_breached": false,
+            "keywords": [
+                "Large",
+                "structural",
+                "crack"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 40,
+            "ward_id": 4,
+            "ward_name": "Rohini",
+            "category": "Road Damage",
+            "text": "Road caved in near Rohini main junction. Sinkhole risk for passing traffic.",
+            "status": "In Progress",
+            "sla_hrs": 6,
+            "elapsed": 89.9,
+            "severity": 7.9,
+            "credibility": 7.9,
+            "label": "HIGH",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Road",
+                "caved",
+                "in"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 41,
+            "ward_id": 6,
+            "ward_name": "Lajpat Nagar",
+            "category": "Road Damage",
+            "text": "Extensive potholes on the main road in Lajpat Nagar. Causing huge traffic jams during rush hour.",
+            "status": "In Progress",
+            "sla_hrs": 48,
+            "elapsed": 87.7,
+            "severity": 4.9,
+            "credibility": 5.1,
+            "label": "MEDIUM",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Extensive",
+                "potholes",
+                "on"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 42,
+            "ward_id": 3,
+            "ward_name": "Karol Bagh",
+            "category": "Road Damage",
+            "text": "Massive pothole causing accidents near Lotus Temple in Karol Bagh. Motorbike damaged tonight.",
+            "status": "Pending",
+            "sla_hrs": 72,
+            "elapsed": 84.1,
+            "severity": 8.1,
+            "credibility": 8.1,
+            "label": "HIGH",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Massive",
+                "pothole",
+                "causing"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 43,
+            "ward_id": 7,
+            "ward_name": "Vasant Kunj",
+            "category": "Water Leakage",
+            "text": "Overhead tank leaking continuously for 3 days in Vasant Kunj public park.",
+            "status": "In Progress",
+            "sla_hrs": 12,
+            "elapsed": 89.0,
+            "severity": 4.7,
+            "credibility": 7.2,
+            "label": "MEDIUM",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Overhead",
+                "tank",
+                "leaking"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 44,
+            "ward_id": 10,
+            "ward_name": "Pitampura",
+            "category": "Emergency",
+            "text": "Building collapse reported in narrow lane of Pitampura. People trapped inside, urgent ambulance and rescue needed.",
+            "status": "In Progress",
+            "sla_hrs": 6,
+            "elapsed": 62.5,
+            "severity": 9.2,
+            "credibility": 5.3,
+            "label": "CRITICAL",
+            "emergency": true,
+            "sla_breached": true,
+            "keywords": [
+                "Building",
+                "collapse",
+                "reported"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 45,
+            "ward_id": 5,
+            "ward_name": "Dwarka",
+            "category": "Garbage Issue",
+            "text": "Bins overflowing for a week outside the market in Dwarka. Serious health hazard.",
+            "status": "Pending",
+            "sla_hrs": 48,
+            "elapsed": 42.5,
+            "severity": 5.1,
+            "credibility": 7.0,
+            "label": "MEDIUM",
+            "emergency": false,
+            "sla_breached": false,
+            "keywords": [
+                "Bins",
+                "overflowing",
+                "for"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 46,
+            "ward_id": 3,
+            "ward_name": "Karol Bagh",
+            "category": "Water Leakage",
+            "text": "Underground pipeline leak causing road to subside near Select Citywalk Mall in Karol Bagh.",
+            "status": "Pending",
+            "sla_hrs": 48,
+            "elapsed": 53.5,
+            "severity": 4.5,
+            "credibility": 8.3,
+            "label": "MEDIUM",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Underground",
+                "pipeline",
+                "leak"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 47,
+            "ward_id": 5,
+            "ward_name": "Dwarka",
+            "category": "Water Leakage",
+            "text": "Underground pipeline leak causing road to subside near Sarojini Nagar Market in Dwarka.",
+            "status": "Pending",
+            "sla_hrs": 72,
+            "elapsed": 73.8,
+            "severity": 7.4,
+            "credibility": 5.1,
+            "label": "HIGH",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Underground",
+                "pipeline",
+                "leak"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 48,
+            "ward_id": 7,
+            "ward_name": "Vasant Kunj",
+            "category": "Garbage Issue",
+            "text": "Garbage collection stopped for 8 days in Vasant Kunj. Smell is unbearable to nearby households.",
+            "status": "Pending",
+            "sla_hrs": 48,
+            "elapsed": 97.9,
+            "severity": 5.1,
+            "credibility": 8.7,
+            "label": "MEDIUM",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Garbage",
+                "collection",
+                "stopped"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 49,
+            "ward_id": 4,
+            "ward_name": "Rohini",
+            "category": "Garbage Issue",
+            "text": "Illegal garbage burning in an empty plot at Rohini. Toxic smoke is affecting residents.",
+            "status": "In Progress",
+            "sla_hrs": 72,
+            "elapsed": 78.9,
+            "severity": 4.5,
+            "credibility": 9.1,
+            "label": "MEDIUM",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Illegal",
+                "garbage",
+                "burning"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 50,
+            "ward_id": 8,
+            "ward_name": "Chandni Chowk",
+            "category": "Emergency",
+            "text": "Building collapse reported in narrow lane of Chandni Chowk. People trapped inside, urgent ambulance and rescue needed.",
+            "status": "Pending",
+            "sla_hrs": 24,
+            "elapsed": 70.3,
+            "severity": 9.2,
+            "credibility": 5.5,
+            "label": "CRITICAL",
+            "emergency": true,
+            "sla_breached": true,
+            "keywords": [
+                "Building",
+                "collapse",
+                "reported"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 51,
+            "ward_id": 8,
+            "ward_name": "Chandni Chowk",
+            "category": "Road Damage",
+            "text": "Road caved in near Chandni Chowk main junction. Sinkhole risk for passing traffic.",
+            "status": "Pending",
+            "sla_hrs": 48,
+            "elapsed": 20.7,
+            "severity": 2.9,
+            "credibility": 9.5,
+            "label": "LOW",
+            "emergency": false,
+            "sla_breached": false,
+            "keywords": [
+                "Road",
+                "caved",
+                "in"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 52,
+            "ward_id": 9,
+            "ward_name": "Okhla",
+            "category": "Garbage Issue",
+            "text": "Illegal garbage burning in an empty plot at Okhla. Toxic smoke is affecting residents.",
+            "status": "Pending",
+            "sla_hrs": 12,
+            "elapsed": 62.9,
+            "severity": 5.9,
+            "credibility": 5.4,
+            "label": "MEDIUM",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Illegal",
+                "garbage",
+                "burning"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 53,
+            "ward_id": 8,
+            "ward_name": "Chandni Chowk",
+            "category": "Road Damage",
+            "text": "Extensive potholes on the main road in Chandni Chowk. Causing huge traffic jams during rush hour.",
+            "status": "Pending",
+            "sla_hrs": 12,
+            "elapsed": 34.8,
+            "severity": 5.7,
+            "credibility": 8.4,
+            "label": "MEDIUM",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Extensive",
+                "potholes",
+                "on"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 54,
+            "ward_id": 2,
+            "ward_name": "Civil Lines",
+            "category": "Public Safety",
+            "text": "Abandoned building near Civil Lines market used for suspicious activities at night. Residents afraid.",
+            "status": "Pending",
+            "sla_hrs": 72,
+            "elapsed": 43.8,
+            "severity": 4.1,
+            "credibility": 8.7,
+            "label": "MEDIUM",
+            "emergency": false,
+            "sla_breached": false,
+            "keywords": [
+                "Abandoned",
+                "building",
+                "near"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 55,
+            "ward_id": 7,
+            "ward_name": "Vasant Kunj",
+            "category": "Street Light Failure",
+            "text": "Dim and flickering street lights in Vasant Kunj sector causing safety concerns for women commuting late.",
+            "status": "Pending",
+            "sla_hrs": 12,
+            "elapsed": 94.2,
+            "severity": 2.1,
+            "credibility": 9.1,
+            "label": "LOW",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Dim",
+                "and",
+                "flickering"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 56,
+            "ward_id": 1,
+            "ward_name": "Connaught Place",
+            "category": "Road Damage",
+            "text": "Broken footpaths in Connaught Place making it hard for pedestrians. Multiple elderly have tripped.",
+            "status": "Pending",
+            "sla_hrs": 6,
+            "elapsed": 18.6,
+            "severity": 7.6,
+            "credibility": 7.2,
+            "label": "HIGH",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Broken",
+                "footpaths",
+                "in"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 57,
+            "ward_id": 2,
+            "ward_name": "Civil Lines",
+            "category": "Garbage Issue",
+            "text": "Stink from uncollected waste near India Gate in Civil Lines has made it impossible to breathe.",
+            "status": "In Progress",
+            "sla_hrs": 72,
+            "elapsed": 99.3,
+            "severity": 2.9,
+            "credibility": 7.5,
+            "label": "LOW",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Stink",
+                "from",
+                "uncollected"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 58,
+            "ward_id": 5,
+            "ward_name": "Dwarka",
+            "category": "Street Light Failure",
+            "text": "Park lighting in Dwarka not working, area totally unlit.",
+            "status": "Pending",
+            "sla_hrs": 6,
+            "elapsed": 81.7,
+            "severity": 5.4,
+            "credibility": 5.6,
+            "label": "MEDIUM",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Park",
+                "lighting",
+                "in"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 59,
+            "ward_id": 3,
+            "ward_name": "Karol Bagh",
+            "category": "Street Light Failure",
+            "text": "Dim and flickering street lights in Karol Bagh sector causing safety concerns for women commuting late.",
+            "status": "Pending",
+            "sla_hrs": 24,
+            "elapsed": 55.6,
+            "severity": 8.1,
+            "credibility": 5.4,
+            "label": "HIGH",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Dim",
+                "and",
+                "flickering"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 60,
+            "ward_id": 5,
+            "ward_name": "Dwarka",
+            "category": "Street Light Failure",
+            "text": "Park lighting in Dwarka not working, area totally unlit.",
+            "status": "In Progress",
+            "sla_hrs": 48,
+            "elapsed": 39.8,
+            "severity": 6.1,
+            "credibility": 5.9,
+            "label": "HIGH",
+            "emergency": false,
+            "sla_breached": false,
+            "keywords": [
+                "Park",
+                "lighting",
+                "in"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 61,
+            "ward_id": 1,
+            "ward_name": "Connaught Place",
+            "category": "Road Damage",
+            "text": "Massive pothole causing accidents near Qutub Minar in Connaught Place. Motorbike damaged tonight.",
+            "status": "Pending",
+            "sla_hrs": 72,
+            "elapsed": 92.8,
+            "severity": 6.8,
+            "credibility": 6.1,
+            "label": "HIGH",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Massive",
+                "pothole",
+                "causing"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 62,
+            "ward_id": 8,
+            "ward_name": "Chandni Chowk",
+            "category": "Emergency",
+            "text": "Live high-tension wire fell on the main road of Chandni Chowk. People are gathering, extreme electric shock danger.",
+            "status": "Pending",
+            "sla_hrs": 48,
+            "elapsed": 78.0,
+            "severity": 9.9,
+            "credibility": 6.8,
+            "label": "CRITICAL",
+            "emergency": true,
+            "sla_breached": true,
+            "keywords": [
+                "Live",
+                "high-tension",
+                "wire"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 63,
+            "ward_id": 6,
+            "ward_name": "Lajpat Nagar",
+            "category": "Road Damage",
+            "text": "Large structural crack developed on the flyover approach in Lajpat Nagar. Needs urgent assessment.",
+            "status": "In Progress",
+            "sla_hrs": 6,
+            "elapsed": 6.9,
+            "severity": 6.2,
+            "credibility": 9.1,
+            "label": "HIGH",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Large",
+                "structural",
+                "crack"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 64,
+            "ward_id": 9,
+            "ward_name": "Okhla",
+            "category": "Emergency",
+            "text": "Building collapse reported in narrow lane of Okhla. People trapped inside, urgent ambulance and rescue needed.",
+            "status": "In Progress",
+            "sla_hrs": 48,
+            "elapsed": 91.9,
+            "severity": 9.5,
+            "credibility": 5.5,
+            "label": "CRITICAL",
+            "emergency": true,
+            "sla_breached": true,
+            "keywords": [
+                "Building",
+                "collapse",
+                "reported"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 65,
+            "ward_id": 3,
+            "ward_name": "Karol Bagh",
+            "category": "Road Damage",
+            "text": "Extensive potholes on the main road in Karol Bagh. Causing huge traffic jams during rush hour.",
+            "status": "Pending",
+            "sla_hrs": 6,
+            "elapsed": 100.0,
+            "severity": 4.4,
+            "credibility": 5.1,
+            "label": "MEDIUM",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Extensive",
+                "potholes",
+                "on"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 66,
+            "ward_id": 4,
+            "ward_name": "Rohini",
+            "category": "Public Safety",
+            "text": "Uncovered deep manhole in Rohini. Someone could easily fall in at night.",
+            "status": "Pending",
+            "sla_hrs": 48,
+            "elapsed": 63.7,
+            "severity": 2.7,
+            "credibility": 6.1,
+            "label": "LOW",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Uncovered",
+                "deep",
+                "manhole"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 67,
+            "ward_id": 7,
+            "ward_name": "Vasant Kunj",
+            "category": "Public Safety",
+            "text": "Dengue hotspot: Stagnant water pool near Vasant Kunj has become a mosquito breeding ground. Multiple cases reported.",
+            "status": "Pending",
+            "sla_hrs": 72,
+            "elapsed": 39.3,
+            "severity": 3.5,
+            "credibility": 5.8,
+            "label": "MEDIUM",
+            "emergency": false,
+            "sla_breached": false,
+            "keywords": [
+                "Dengue",
+                "hotspot:",
+                "Stagnant"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 68,
+            "ward_id": 6,
+            "ward_name": "Lajpat Nagar",
+            "category": "Emergency",
+            "text": "Live high-tension wire fell on the main road of Lajpat Nagar. People are gathering, extreme electric shock danger.",
+            "status": "Pending",
+            "sla_hrs": 12,
+            "elapsed": 63.4,
+            "severity": 8.1,
+            "credibility": 9.0,
+            "label": "HIGH",
+            "emergency": true,
+            "sla_breached": true,
+            "keywords": [
+                "Live",
+                "high-tension",
+                "wire"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 69,
+            "ward_id": 1,
+            "ward_name": "Connaught Place",
+            "category": "Road Damage",
+            "text": "Broken footpaths in Connaught Place making it hard for pedestrians. Multiple elderly have tripped.",
+            "status": "Pending",
+            "sla_hrs": 12,
+            "elapsed": 98.4,
+            "severity": 4.7,
+            "credibility": 5.6,
+            "label": "MEDIUM",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Broken",
+                "footpaths",
+                "in"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 70,
+            "ward_id": 9,
+            "ward_name": "Okhla",
+            "category": "Water Leakage",
+            "text": "Major water pipe burst on Okhla main road. Water flooding the street for hours.",
+            "status": "Pending",
+            "sla_hrs": 6,
+            "elapsed": 18.8,
+            "severity": 4.8,
+            "credibility": 7.6,
+            "label": "MEDIUM",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Major",
+                "water",
+                "pipe"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 71,
+            "ward_id": 5,
+            "ward_name": "Dwarka",
+            "category": "Garbage Issue",
+            "text": "Stink from uncollected waste near Jantar Mantar in Dwarka has made it impossible to breathe.",
+            "status": "Pending",
+            "sla_hrs": 12,
+            "elapsed": 11.6,
+            "severity": 4.0,
+            "credibility": 6.0,
+            "label": "MEDIUM",
+            "emergency": false,
+            "sla_breached": false,
+            "keywords": [
+                "Stink",
+                "from",
+                "uncollected"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 72,
+            "ward_id": 2,
+            "ward_name": "Civil Lines",
+            "category": "Street Light Failure",
+            "text": "Pole leaning dangerously ready to collapse in Civil Lines near Select Citywalk Mall.",
+            "status": "Pending",
+            "sla_hrs": 48,
+            "elapsed": 16.8,
+            "severity": 3.4,
+            "credibility": 7.5,
+            "label": "LOW",
+            "emergency": false,
+            "sla_breached": false,
+            "keywords": [
+                "Pole",
+                "leaning",
+                "dangerously"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 73,
+            "ward_id": 9,
+            "ward_name": "Okhla",
+            "category": "Emergency",
+            "text": "Live high-tension wire fell on the main road of Okhla. People are gathering, extreme electric shock danger.",
+            "status": "Pending",
+            "sla_hrs": 72,
+            "elapsed": 6.8,
+            "severity": 9.9,
+            "credibility": 8.9,
+            "label": "CRITICAL",
+            "emergency": true,
+            "sla_breached": false,
+            "keywords": [
+                "Live",
+                "high-tension",
+                "wire"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 74,
+            "ward_id": 5,
+            "ward_name": "Dwarka",
+            "category": "Road Damage",
+            "text": "Massive pothole causing accidents near Akshardham Temple in Dwarka. Motorbike damaged tonight.",
+            "status": "Pending",
+            "sla_hrs": 6,
+            "elapsed": 17.4,
+            "severity": 5.8,
+            "credibility": 5.2,
+            "label": "MEDIUM",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Massive",
+                "pothole",
+                "causing"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 75,
+            "ward_id": 7,
+            "ward_name": "Vasant Kunj",
+            "category": "Garbage Issue",
+            "text": "Stink from uncollected waste near Jantar Mantar in Vasant Kunj has made it impossible to breathe.",
+            "status": "In Progress",
+            "sla_hrs": 24,
+            "elapsed": 2.4,
+            "severity": 6.3,
+            "credibility": 8.0,
+            "label": "HIGH",
+            "emergency": false,
+            "sla_breached": false,
+            "keywords": [
+                "Stink",
+                "from",
+                "uncollected"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 76,
+            "ward_id": 2,
+            "ward_name": "Civil Lines",
+            "category": "Emergency",
+            "text": "Building collapse reported in narrow lane of Civil Lines. People trapped inside, urgent ambulance and rescue needed.",
+            "status": "Pending",
+            "sla_hrs": 72,
+            "elapsed": 39.7,
+            "severity": 8.7,
+            "credibility": 6.3,
+            "label": "CRITICAL",
+            "emergency": true,
+            "sla_breached": false,
+            "keywords": [
+                "Building",
+                "collapse",
+                "reported"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 77,
+            "ward_id": 4,
+            "ward_name": "Rohini",
+            "category": "Public Safety",
+            "text": "Uncovered deep manhole in Rohini. Someone could easily fall in at night.",
+            "status": "In Progress",
+            "sla_hrs": 48,
+            "elapsed": 35.0,
+            "severity": 3.9,
+            "credibility": 5.7,
+            "label": "MEDIUM",
+            "emergency": false,
+            "sla_breached": false,
+            "keywords": [
+                "Uncovered",
+                "deep",
+                "manhole"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 78,
+            "ward_id": 9,
+            "ward_name": "Okhla",
+            "category": "Street Light Failure",
+            "text": "Entire stretch of street lights off in Okhla for the past 5 days. Very dark and unsafe at night.",
+            "status": "Pending",
+            "sla_hrs": 48,
+            "elapsed": 40.7,
+            "severity": 6.4,
+            "credibility": 7.6,
+            "label": "HIGH",
+            "emergency": false,
+            "sla_breached": false,
+            "keywords": [
+                "Entire",
+                "stretch",
+                "of"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 79,
+            "ward_id": 2,
+            "ward_name": "Civil Lines",
+            "category": "Water Leakage",
+            "text": "Overhead tank leaking continuously for 3 days in Civil Lines public park.",
+            "status": "In Progress",
+            "sla_hrs": 72,
+            "elapsed": 59.7,
+            "severity": 8.1,
+            "credibility": 8.0,
+            "label": "HIGH",
+            "emergency": false,
+            "sla_breached": false,
+            "keywords": [
+                "Overhead",
+                "tank",
+                "leaking"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 80,
+            "ward_id": 2,
+            "ward_name": "Civil Lines",
+            "category": "Emergency",
+            "text": "Sewage overflow flooding homes in Civil Lines. Raw sewage entering ground floor houses near Red Fort.",
+            "status": "Pending",
+            "sla_hrs": 72,
+            "elapsed": 86.3,
+            "severity": 9.2,
+            "credibility": 8.5,
+            "label": "CRITICAL",
+            "emergency": true,
+            "sla_breached": true,
+            "keywords": [
+                "Sewage",
+                "overflow",
+                "flooding"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 81,
+            "ward_id": 7,
+            "ward_name": "Vasant Kunj",
+            "category": "Street Light Failure",
+            "text": "Entire stretch of street lights off in Vasant Kunj for the past 5 days. Very dark and unsafe at night.",
+            "status": "In Progress",
+            "sla_hrs": 6,
+            "elapsed": 18.5,
+            "severity": 7.8,
+            "credibility": 9.4,
+            "label": "HIGH",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Entire",
+                "stretch",
+                "of"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 82,
+            "ward_id": 1,
+            "ward_name": "Connaught Place",
+            "category": "Street Light Failure",
+            "text": "Pole leaning dangerously ready to collapse in Connaught Place near Chandni Chowk Market.",
+            "status": "Pending",
+            "sla_hrs": 48,
+            "elapsed": 69.1,
+            "severity": 2.3,
+            "credibility": 5.9,
+            "label": "LOW",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Pole",
+                "leaning",
+                "dangerously"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 83,
+            "ward_id": 4,
+            "ward_name": "Rohini",
+            "category": "Garbage Issue",
+            "text": "Garbage collection stopped for 8 days in Rohini. Smell is unbearable to nearby households.",
+            "status": "Pending",
+            "sla_hrs": 24,
+            "elapsed": 27.1,
+            "severity": 2.5,
+            "credibility": 8.5,
+            "label": "LOW",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Garbage",
+                "collection",
+                "stopped"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 84,
+            "ward_id": 6,
+            "ward_name": "Lajpat Nagar",
+            "category": "Road Damage",
+            "text": "Large structural crack developed on the flyover approach in Lajpat Nagar. Needs urgent assessment.",
+            "status": "In Progress",
+            "sla_hrs": 72,
+            "elapsed": 39.2,
+            "severity": 2.1,
+            "credibility": 6.7,
+            "label": "LOW",
+            "emergency": false,
+            "sla_breached": false,
+            "keywords": [
+                "Large",
+                "structural",
+                "crack"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 85,
+            "ward_id": 10,
+            "ward_name": "Pitampura",
+            "category": "Garbage Issue",
+            "text": "Bins overflowing for a week outside the market in Pitampura. Serious health hazard.",
+            "status": "Pending",
+            "sla_hrs": 24,
+            "elapsed": 97.5,
+            "severity": 4.9,
+            "credibility": 9.3,
+            "label": "MEDIUM",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Bins",
+                "overflowing",
+                "for"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 86,
+            "ward_id": 9,
+            "ward_name": "Okhla",
+            "category": "Water Leakage",
+            "text": "Overhead tank leaking continuously for 3 days in Okhla public park.",
+            "status": "Pending",
+            "sla_hrs": 48,
+            "elapsed": 73.6,
+            "severity": 6.2,
+            "credibility": 9.1,
+            "label": "HIGH",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Overhead",
+                "tank",
+                "leaking"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 87,
+            "ward_id": 5,
+            "ward_name": "Dwarka",
+            "category": "Water Leakage",
+            "text": "Overhead tank leaking continuously for 3 days in Dwarka public park.",
+            "status": "In Progress",
+            "sla_hrs": 6,
+            "elapsed": 38.2,
+            "severity": 4.5,
+            "credibility": 5.3,
+            "label": "MEDIUM",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Overhead",
+                "tank",
+                "leaking"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 88,
+            "ward_id": 9,
+            "ward_name": "Okhla",
+            "category": "Water Leakage",
+            "text": "Wastage of thousands of liters of water due to broken municipal tap in Okhla.",
+            "status": "Pending",
+            "sla_hrs": 72,
+            "elapsed": 99.4,
+            "severity": 2.3,
+            "credibility": 7.0,
+            "label": "LOW",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Wastage",
+                "of",
+                "thousands"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 89,
+            "ward_id": 10,
+            "ward_name": "Pitampura",
+            "category": "Emergency",
+            "text": "Building collapse reported in narrow lane of Pitampura. People trapped inside, urgent ambulance and rescue needed.",
+            "status": "Pending",
+            "sla_hrs": 72,
+            "elapsed": 27.8,
+            "severity": 8.2,
+            "credibility": 7.2,
+            "label": "HIGH",
+            "emergency": true,
+            "sla_breached": false,
+            "keywords": [
+                "Building",
+                "collapse",
+                "reported"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 90,
+            "ward_id": 1,
+            "ward_name": "Connaught Place",
+            "category": "Road Damage",
+            "text": "Broken footpaths in Connaught Place making it hard for pedestrians. Multiple elderly have tripped.",
+            "status": "In Progress",
+            "sla_hrs": 24,
+            "elapsed": 20.8,
+            "severity": 3.6,
+            "credibility": 7.4,
+            "label": "MEDIUM",
+            "emergency": false,
+            "sla_breached": false,
+            "keywords": [
+                "Broken",
+                "footpaths",
+                "in"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 91,
+            "ward_id": 9,
+            "ward_name": "Okhla",
+            "category": "Street Light Failure",
+            "text": "Dim and flickering street lights in Okhla sector causing safety concerns for women commuting late.",
+            "status": "Pending",
+            "sla_hrs": 72,
+            "elapsed": 62.8,
+            "severity": 4.7,
+            "credibility": 7.1,
+            "label": "MEDIUM",
+            "emergency": false,
+            "sla_breached": false,
+            "keywords": [
+                "Dim",
+                "and",
+                "flickering"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 92,
+            "ward_id": 1,
+            "ward_name": "Connaught Place",
+            "category": "Road Damage",
+            "text": "Large structural crack developed on the flyover approach in Connaught Place. Needs urgent assessment.",
+            "status": "Pending",
+            "sla_hrs": 24,
+            "elapsed": 64.6,
+            "severity": 4.4,
+            "credibility": 7.6,
+            "label": "MEDIUM",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Large",
+                "structural",
+                "crack"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 93,
+            "ward_id": 9,
+            "ward_name": "Okhla",
+            "category": "Garbage Issue",
+            "text": "Bins overflowing for a week outside the market in Okhla. Serious health hazard.",
+            "status": "Pending",
+            "sla_hrs": 24,
+            "elapsed": 45.3,
+            "severity": 7.8,
+            "credibility": 7.8,
+            "label": "HIGH",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Bins",
+                "overflowing",
+                "for"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 94,
+            "ward_id": 6,
+            "ward_name": "Lajpat Nagar",
+            "category": "Road Damage",
+            "text": "Large structural crack developed on the flyover approach in Lajpat Nagar. Needs urgent assessment.",
+            "status": "Pending",
+            "sla_hrs": 72,
+            "elapsed": 19.7,
+            "severity": 7.2,
+            "credibility": 9.4,
+            "label": "HIGH",
+            "emergency": false,
+            "sla_breached": false,
+            "keywords": [
+                "Large",
+                "structural",
+                "crack"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 95,
+            "ward_id": 8,
+            "ward_name": "Chandni Chowk",
+            "category": "Street Light Failure",
+            "text": "Park lighting in Chandni Chowk not working, area totally unlit.",
+            "status": "In Progress",
+            "sla_hrs": 6,
+            "elapsed": 3.6,
+            "severity": 6.7,
+            "credibility": 8.9,
+            "label": "HIGH",
+            "emergency": false,
+            "sla_breached": false,
+            "keywords": [
+                "Park",
+                "lighting",
+                "in"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 96,
+            "ward_id": 9,
+            "ward_name": "Okhla",
+            "category": "Water Leakage",
+            "text": "Major water pipe burst on Okhla main road. Water flooding the street for hours.",
+            "status": "In Progress",
+            "sla_hrs": 48,
+            "elapsed": 59.4,
+            "severity": 3.0,
+            "credibility": 6.5,
+            "label": "LOW",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Major",
+                "water",
+                "pipe"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 97,
+            "ward_id": 4,
+            "ward_name": "Rohini",
+            "category": "Road Damage",
+            "text": "Extensive potholes on the main road in Rohini. Causing huge traffic jams during rush hour.",
+            "status": "Pending",
+            "sla_hrs": 48,
+            "elapsed": 73.8,
+            "severity": 2.6,
+            "credibility": 7.5,
+            "label": "LOW",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Extensive",
+                "potholes",
+                "on"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 98,
+            "ward_id": 8,
+            "ward_name": "Chandni Chowk",
+            "category": "Public Safety",
+            "text": "Uncovered deep manhole in Chandni Chowk. Someone could easily fall in at night.",
+            "status": "Pending",
+            "sla_hrs": 72,
+            "elapsed": 38.4,
+            "severity": 3.2,
+            "credibility": 7.6,
+            "label": "LOW",
+            "emergency": false,
+            "sla_breached": false,
+            "keywords": [
+                "Uncovered",
+                "deep",
+                "manhole"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 99,
+            "ward_id": 5,
+            "ward_name": "Dwarka",
+            "category": "Garbage Issue",
+            "text": "Illegal garbage burning in an empty plot at Dwarka. Toxic smoke is affecting residents.",
+            "status": "Pending",
+            "sla_hrs": 72,
+            "elapsed": 90.2,
+            "severity": 8.4,
+            "credibility": 5.0,
+            "label": "HIGH",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Illegal",
+                "garbage",
+                "burning"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 100,
+            "ward_id": 3,
+            "ward_name": "Karol Bagh",
+            "category": "Garbage Issue",
+            "text": "Stink from uncollected waste near Jantar Mantar in Karol Bagh has made it impossible to breathe.",
+            "status": "Pending",
+            "sla_hrs": 72,
+            "elapsed": 71.8,
+            "severity": 4.3,
+            "credibility": 8.4,
+            "label": "MEDIUM",
+            "emergency": false,
+            "sla_breached": false,
+            "keywords": [
+                "Stink",
+                "from",
+                "uncollected"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 101,
+            "ward_id": 10,
+            "ward_name": "Pitampura",
+            "category": "Street Light Failure",
+            "text": "Pole leaning dangerously ready to collapse in Pitampura near Qutub Minar.",
+            "status": "Pending",
+            "sla_hrs": 72,
+            "elapsed": 4.0,
+            "severity": 6.1,
+            "credibility": 9.3,
+            "label": "HIGH",
+            "emergency": false,
+            "sla_breached": false,
+            "keywords": [
+                "Pole",
+                "leaning",
+                "dangerously"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 102,
+            "ward_id": 10,
+            "ward_name": "Pitampura",
+            "category": "Garbage Issue",
+            "text": "Bins overflowing for a week outside the market in Pitampura. Serious health hazard.",
+            "status": "In Progress",
+            "sla_hrs": 72,
+            "elapsed": 62.4,
+            "severity": 3.4,
+            "credibility": 8.9,
+            "label": "LOW",
+            "emergency": false,
+            "sla_breached": false,
+            "keywords": [
+                "Bins",
+                "overflowing",
+                "for"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 103,
+            "ward_id": 8,
+            "ward_name": "Chandni Chowk",
+            "category": "Water Leakage",
+            "text": "Major water pipe burst on Chandni Chowk main road. Water flooding the street for hours.",
+            "status": "In Progress",
+            "sla_hrs": 12,
+            "elapsed": 27.5,
+            "severity": 7.8,
+            "credibility": 7.9,
+            "label": "HIGH",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Major",
+                "water",
+                "pipe"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 104,
+            "ward_id": 4,
+            "ward_name": "Rohini",
+            "category": "Public Safety",
+            "text": "Dengue hotspot: Stagnant water pool near Rohini has become a mosquito breeding ground. Multiple cases reported.",
+            "status": "Pending",
+            "sla_hrs": 48,
+            "elapsed": 4.6,
+            "severity": 7.7,
+            "credibility": 8.5,
+            "label": "HIGH",
+            "emergency": false,
+            "sla_breached": false,
+            "keywords": [
+                "Dengue",
+                "hotspot:",
+                "Stagnant"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 105,
+            "ward_id": 5,
+            "ward_name": "Dwarka",
+            "category": "Road Damage",
+            "text": "Broken footpaths in Dwarka making it hard for pedestrians. Multiple elderly have tripped.",
+            "status": "Pending",
+            "sla_hrs": 24,
+            "elapsed": 36.6,
+            "severity": 6.7,
+            "credibility": 5.3,
+            "label": "HIGH",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Broken",
+                "footpaths",
+                "in"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 106,
+            "ward_id": 4,
+            "ward_name": "Rohini",
+            "category": "Public Safety",
+            "text": "Dengue hotspot: Stagnant water pool near Rohini has become a mosquito breeding ground. Multiple cases reported.",
+            "status": "Pending",
+            "sla_hrs": 24,
+            "elapsed": 14.2,
+            "severity": 8.4,
+            "credibility": 6.5,
+            "label": "HIGH",
+            "emergency": false,
+            "sla_breached": false,
+            "keywords": [
+                "Dengue",
+                "hotspot:",
+                "Stagnant"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 107,
+            "ward_id": 1,
+            "ward_name": "Connaught Place",
+            "category": "Street Light Failure",
+            "text": "Park lighting in Connaught Place not working, area totally unlit.",
+            "status": "In Progress",
+            "sla_hrs": 6,
+            "elapsed": 96.0,
+            "severity": 4.2,
+            "credibility": 5.1,
+            "label": "MEDIUM",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Park",
+                "lighting",
+                "in"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 108,
+            "ward_id": 1,
+            "ward_name": "Connaught Place",
+            "category": "Street Light Failure",
+            "text": "Wiring exposed at the base of the street light in Connaught Place. Risk of electric shock.",
+            "status": "Pending",
+            "sla_hrs": 24,
+            "elapsed": 2.9,
+            "severity": 2.3,
+            "credibility": 8.1,
+            "label": "LOW",
+            "emergency": false,
+            "sla_breached": false,
+            "keywords": [
+                "Wiring",
+                "exposed",
+                "at"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 109,
+            "ward_id": 2,
+            "ward_name": "Civil Lines",
+            "category": "Water Leakage",
+            "text": "Major water pipe burst on Civil Lines main road. Water flooding the street for hours.",
+            "status": "In Progress",
+            "sla_hrs": 24,
+            "elapsed": 70.9,
+            "severity": 7.2,
+            "credibility": 7.8,
+            "label": "HIGH",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Major",
+                "water",
+                "pipe"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 110,
+            "ward_id": 4,
+            "ward_name": "Rohini",
+            "category": "Emergency",
+            "text": "Major fire outbreak at an apartment building in Rohini near Khari Baoli. Smoke spreading rapidly.",
+            "status": "In Progress",
+            "sla_hrs": 72,
+            "elapsed": 39.1,
+            "severity": 9.2,
+            "credibility": 6.2,
+            "label": "CRITICAL",
+            "emergency": true,
+            "sla_breached": false,
+            "keywords": [
+                "Major",
+                "fire",
+                "outbreak"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 111,
+            "ward_id": 3,
+            "ward_name": "Karol Bagh",
+            "category": "Public Safety",
+            "text": "Dengue hotspot: Stagnant water pool near Karol Bagh has become a mosquito breeding ground. Multiple cases reported.",
+            "status": "Pending",
+            "sla_hrs": 6,
+            "elapsed": 24.6,
+            "severity": 5.4,
+            "credibility": 9.0,
+            "label": "MEDIUM",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Dengue",
+                "hotspot:",
+                "Stagnant"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 112,
+            "ward_id": 6,
+            "ward_name": "Lajpat Nagar",
+            "category": "Emergency",
+            "text": "Building collapse reported in narrow lane of Lajpat Nagar. People trapped inside, urgent ambulance and rescue needed.",
+            "status": "Pending",
+            "sla_hrs": 48,
+            "elapsed": 2.7,
+            "severity": 8.8,
+            "credibility": 8.0,
+            "label": "CRITICAL",
+            "emergency": true,
+            "sla_breached": false,
+            "keywords": [
+                "Building",
+                "collapse",
+                "reported"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 113,
+            "ward_id": 7,
+            "ward_name": "Vasant Kunj",
+            "category": "Street Light Failure",
+            "text": "Wiring exposed at the base of the street light in Vasant Kunj. Risk of electric shock.",
+            "status": "Pending",
+            "sla_hrs": 12,
+            "elapsed": 22.9,
+            "severity": 6.7,
+            "credibility": 8.2,
+            "label": "HIGH",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Wiring",
+                "exposed",
+                "at"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 114,
+            "ward_id": 2,
+            "ward_name": "Civil Lines",
+            "category": "Emergency",
+            "text": "URGENT: Gas leak detected near Rashtrapati Bhavan in Civil Lines. Multiple people complaining of dizziness.",
+            "status": "In Progress",
+            "sla_hrs": 48,
+            "elapsed": 81.9,
+            "severity": 9.4,
+            "credibility": 7.1,
+            "label": "CRITICAL",
+            "emergency": true,
+            "sla_breached": true,
+            "keywords": [
+                "URGENT:",
+                "Gas",
+                "leak"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 115,
+            "ward_id": 4,
+            "ward_name": "Rohini",
+            "category": "Street Light Failure",
+            "text": "Pole leaning dangerously ready to collapse in Rohini near Sarojini Nagar Market.",
+            "status": "In Progress",
+            "sla_hrs": 48,
+            "elapsed": 5.0,
+            "severity": 6.2,
+            "credibility": 6.4,
+            "label": "HIGH",
+            "emergency": false,
+            "sla_breached": false,
+            "keywords": [
+                "Pole",
+                "leaning",
+                "dangerously"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 116,
+            "ward_id": 6,
+            "ward_name": "Lajpat Nagar",
+            "category": "Water Leakage",
+            "text": "Major water pipe burst on Lajpat Nagar main road. Water flooding the street for hours.",
+            "status": "In Progress",
+            "sla_hrs": 24,
+            "elapsed": 36.2,
+            "severity": 2.8,
+            "credibility": 7.6,
+            "label": "LOW",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Major",
+                "water",
+                "pipe"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 117,
+            "ward_id": 9,
+            "ward_name": "Okhla",
+            "category": "Road Damage",
+            "text": "Large structural crack developed on the flyover approach in Okhla. Needs urgent assessment.",
+            "status": "Pending",
+            "sla_hrs": 72,
+            "elapsed": 47.0,
+            "severity": 7.3,
+            "credibility": 6.6,
+            "label": "HIGH",
+            "emergency": false,
+            "sla_breached": false,
+            "keywords": [
+                "Large",
+                "structural",
+                "crack"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 118,
+            "ward_id": 3,
+            "ward_name": "Karol Bagh",
+            "category": "Emergency",
+            "text": "Major fire outbreak at an apartment building in Karol Bagh near Khari Baoli. Smoke spreading rapidly.",
+            "status": "Pending",
+            "sla_hrs": 24,
+            "elapsed": 19.8,
+            "severity": 9.1,
+            "credibility": 9.5,
+            "label": "CRITICAL",
+            "emergency": true,
+            "sla_breached": false,
+            "keywords": [
+                "Major",
+                "fire",
+                "outbreak"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 119,
+            "ward_id": 7,
+            "ward_name": "Vasant Kunj",
+            "category": "Garbage Issue",
+            "text": "Illegal garbage burning in an empty plot at Vasant Kunj. Toxic smoke is affecting residents.",
+            "status": "Pending",
+            "sla_hrs": 12,
+            "elapsed": 62.8,
+            "severity": 4.9,
+            "credibility": 7.8,
+            "label": "MEDIUM",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Illegal",
+                "garbage",
+                "burning"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 120,
+            "ward_id": 6,
+            "ward_name": "Lajpat Nagar",
+            "category": "Public Safety",
+            "text": "Dengue hotspot: Stagnant water pool near Lajpat Nagar has become a mosquito breeding ground. Multiple cases reported.",
+            "status": "In Progress",
+            "sla_hrs": 48,
+            "elapsed": 77.4,
+            "severity": 3.4,
+            "credibility": 6.7,
+            "label": "LOW",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Dengue",
+                "hotspot:",
+                "Stagnant"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 121,
+            "ward_id": 8,
+            "ward_name": "Chandni Chowk",
+            "category": "Emergency",
+            "text": "URGENT: Gas leak detected near Red Fort in Chandni Chowk. Multiple people complaining of dizziness.",
+            "status": "Pending",
+            "sla_hrs": 72,
+            "elapsed": 62.2,
+            "severity": 8.3,
+            "credibility": 8.9,
+            "label": "HIGH",
+            "emergency": true,
+            "sla_breached": false,
+            "keywords": [
+                "URGENT:",
+                "Gas",
+                "leak"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 122,
+            "ward_id": 5,
+            "ward_name": "Dwarka",
+            "category": "Street Light Failure",
+            "text": "Dim and flickering street lights in Dwarka sector causing safety concerns for women commuting late.",
+            "status": "Pending",
+            "sla_hrs": 12,
+            "elapsed": 80.4,
+            "severity": 7.5,
+            "credibility": 5.2,
+            "label": "HIGH",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Dim",
+                "and",
+                "flickering"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 123,
+            "ward_id": 4,
+            "ward_name": "Rohini",
+            "category": "Street Light Failure",
+            "text": "Dim and flickering street lights in Rohini sector causing safety concerns for women commuting late.",
+            "status": "Pending",
+            "sla_hrs": 72,
+            "elapsed": 7.1,
+            "severity": 5.7,
+            "credibility": 9.0,
+            "label": "MEDIUM",
+            "emergency": false,
+            "sla_breached": false,
+            "keywords": [
+                "Dim",
+                "and",
+                "flickering"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 124,
+            "ward_id": 6,
+            "ward_name": "Lajpat Nagar",
+            "category": "Garbage Issue",
+            "text": "Bins overflowing for a week outside the market in Lajpat Nagar. Serious health hazard.",
+            "status": "Pending",
+            "sla_hrs": 12,
+            "elapsed": 55.8,
+            "severity": 7.0,
+            "credibility": 9.1,
+            "label": "HIGH",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Bins",
+                "overflowing",
+                "for"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 125,
+            "ward_id": 3,
+            "ward_name": "Karol Bagh",
+            "category": "Public Safety",
+            "text": "Abandoned building near Karol Bagh market used for suspicious activities at night. Residents afraid.",
+            "status": "In Progress",
+            "sla_hrs": 12,
+            "elapsed": 20.3,
+            "severity": 3.1,
+            "credibility": 8.1,
+            "label": "LOW",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Abandoned",
+                "building",
+                "near"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 126,
+            "ward_id": 3,
+            "ward_name": "Karol Bagh",
+            "category": "Public Safety",
+            "text": "Illegal construction blocking the fire exit of a residential building in Karol Bagh.",
+            "status": "Pending",
+            "sla_hrs": 6,
+            "elapsed": 79.5,
+            "severity": 8.1,
+            "credibility": 6.8,
+            "label": "HIGH",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Illegal",
+                "construction",
+                "blocking"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 127,
+            "ward_id": 1,
+            "ward_name": "Connaught Place",
+            "category": "Emergency",
+            "text": "Major fire outbreak at an apartment building in Connaught Place near India Gate. Smoke spreading rapidly.",
+            "status": "Pending",
+            "sla_hrs": 72,
+            "elapsed": 65.2,
+            "severity": 9.3,
+            "credibility": 7.8,
+            "label": "CRITICAL",
+            "emergency": true,
+            "sla_breached": false,
+            "keywords": [
+                "Major",
+                "fire",
+                "outbreak"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 128,
+            "ward_id": 1,
+            "ward_name": "Connaught Place",
+            "category": "Water Leakage",
+            "text": "Contaminated, foul-smelling water coming from taps in Connaught Place. Health risk.",
+            "status": "Pending",
+            "sla_hrs": 12,
+            "elapsed": 3.3,
+            "severity": 3.5,
+            "credibility": 8.3,
+            "label": "MEDIUM",
+            "emergency": false,
+            "sla_breached": false,
+            "keywords": [
+                "Contaminated,",
+                "foul-smelling",
+                "water"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 129,
+            "ward_id": 8,
+            "ward_name": "Chandni Chowk",
+            "category": "Public Safety",
+            "text": "Illegal construction blocking the fire exit of a residential building in Chandni Chowk.",
+            "status": "In Progress",
+            "sla_hrs": 6,
+            "elapsed": 89.9,
+            "severity": 3.3,
+            "credibility": 8.9,
+            "label": "LOW",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Illegal",
+                "construction",
+                "blocking"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 130,
+            "ward_id": 9,
+            "ward_name": "Okhla",
+            "category": "Garbage Issue",
+            "text": "Garbage collection stopped for 8 days in Okhla. Smell is unbearable to nearby households.",
+            "status": "In Progress",
+            "sla_hrs": 12,
+            "elapsed": 87.9,
+            "severity": 7.7,
+            "credibility": 5.2,
+            "label": "HIGH",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Garbage",
+                "collection",
+                "stopped"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 131,
+            "ward_id": 2,
+            "ward_name": "Civil Lines",
+            "category": "Water Leakage",
+            "text": "Wastage of thousands of liters of water due to broken municipal tap in Civil Lines.",
+            "status": "Pending",
+            "sla_hrs": 24,
+            "elapsed": 22.0,
+            "severity": 2.7,
+            "credibility": 5.3,
+            "label": "LOW",
+            "emergency": false,
+            "sla_breached": false,
+            "keywords": [
+                "Wastage",
+                "of",
+                "thousands"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 132,
+            "ward_id": 6,
+            "ward_name": "Lajpat Nagar",
+            "category": "Public Safety",
+            "text": "Uncovered deep manhole in Lajpat Nagar. Someone could easily fall in at night.",
+            "status": "Pending",
+            "sla_hrs": 48,
+            "elapsed": 84.9,
+            "severity": 6.6,
+            "credibility": 5.4,
+            "label": "HIGH",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Uncovered",
+                "deep",
+                "manhole"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 133,
+            "ward_id": 7,
+            "ward_name": "Vasant Kunj",
+            "category": "Street Light Failure",
+            "text": "Dim and flickering street lights in Vasant Kunj sector causing safety concerns for women commuting late.",
+            "status": "In Progress",
+            "sla_hrs": 6,
+            "elapsed": 34.0,
+            "severity": 5.9,
+            "credibility": 7.3,
+            "label": "MEDIUM",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Dim",
+                "and",
+                "flickering"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 134,
+            "ward_id": 3,
+            "ward_name": "Karol Bagh",
+            "category": "Public Safety",
+            "text": "Uncovered deep manhole in Karol Bagh. Someone could easily fall in at night.",
+            "status": "Pending",
+            "sla_hrs": 72,
+            "elapsed": 67.1,
+            "severity": 6.1,
+            "credibility": 5.6,
+            "label": "HIGH",
+            "emergency": false,
+            "sla_breached": false,
+            "keywords": [
+                "Uncovered",
+                "deep",
+                "manhole"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 135,
+            "ward_id": 3,
+            "ward_name": "Karol Bagh",
+            "category": "Public Safety",
+            "text": "Uncovered deep manhole in Karol Bagh. Someone could easily fall in at night.",
+            "status": "Pending",
+            "sla_hrs": 24,
+            "elapsed": 33.8,
+            "severity": 4.4,
+            "credibility": 8.5,
+            "label": "MEDIUM",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Uncovered",
+                "deep",
+                "manhole"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 136,
+            "ward_id": 8,
+            "ward_name": "Chandni Chowk",
+            "category": "Public Safety",
+            "text": "Uncovered deep manhole in Chandni Chowk. Someone could easily fall in at night.",
+            "status": "In Progress",
+            "sla_hrs": 72,
+            "elapsed": 15.0,
+            "severity": 8.3,
+            "credibility": 8.6,
+            "label": "HIGH",
+            "emergency": false,
+            "sla_breached": false,
+            "keywords": [
+                "Uncovered",
+                "deep",
+                "manhole"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 137,
+            "ward_id": 7,
+            "ward_name": "Vasant Kunj",
+            "category": "Water Leakage",
+            "text": "Major water pipe burst on Vasant Kunj main road. Water flooding the street for hours.",
+            "status": "Pending",
+            "sla_hrs": 6,
+            "elapsed": 8.9,
+            "severity": 5.4,
+            "credibility": 5.7,
+            "label": "MEDIUM",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Major",
+                "water",
+                "pipe"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 138,
+            "ward_id": 5,
+            "ward_name": "Dwarka",
+            "category": "Road Damage",
+            "text": "Massive pothole causing accidents near Qutub Minar in Dwarka. Motorbike damaged tonight.",
+            "status": "In Progress",
+            "sla_hrs": 72,
+            "elapsed": 16.0,
+            "severity": 4.7,
+            "credibility": 7.6,
+            "label": "MEDIUM",
+            "emergency": false,
+            "sla_breached": false,
+            "keywords": [
+                "Massive",
+                "pothole",
+                "causing"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 139,
+            "ward_id": 5,
+            "ward_name": "Dwarka",
+            "category": "Garbage Issue",
+            "text": "Illegal garbage burning in an empty plot at Dwarka. Toxic smoke is affecting residents.",
+            "status": "Pending",
+            "sla_hrs": 72,
+            "elapsed": 49.8,
+            "severity": 2.9,
+            "credibility": 7.9,
+            "label": "LOW",
+            "emergency": false,
+            "sla_breached": false,
+            "keywords": [
+                "Illegal",
+                "garbage",
+                "burning"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 140,
+            "ward_id": 1,
+            "ward_name": "Connaught Place",
+            "category": "Garbage Issue",
+            "text": "Massive garbage pile accumulating near Akshardham Temple in Connaught Place. Rats and stray animals multiplying daily.",
+            "status": "Pending",
+            "sla_hrs": 12,
+            "elapsed": 16.1,
+            "severity": 2.6,
+            "credibility": 5.2,
+            "label": "LOW",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Massive",
+                "garbage",
+                "pile"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 141,
+            "ward_id": 4,
+            "ward_name": "Rohini",
+            "category": "Public Safety",
+            "text": "Abandoned building near Rohini market used for suspicious activities at night. Residents afraid.",
+            "status": "Pending",
+            "sla_hrs": 12,
+            "elapsed": 54.3,
+            "severity": 4.9,
+            "credibility": 8.9,
+            "label": "MEDIUM",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Abandoned",
+                "building",
+                "near"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 142,
+            "ward_id": 5,
+            "ward_name": "Dwarka",
+            "category": "Public Safety",
+            "text": "Uncovered deep manhole in Dwarka. Someone could easily fall in at night.",
+            "status": "In Progress",
+            "sla_hrs": 72,
+            "elapsed": 52.2,
+            "severity": 5.2,
+            "credibility": 7.4,
+            "label": "MEDIUM",
+            "emergency": false,
+            "sla_breached": false,
+            "keywords": [
+                "Uncovered",
+                "deep",
+                "manhole"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 143,
+            "ward_id": 7,
+            "ward_name": "Vasant Kunj",
+            "category": "Emergency",
+            "text": "Live high-tension wire fell on the main road of Vasant Kunj. People are gathering, extreme electric shock danger.",
+            "status": "In Progress",
+            "sla_hrs": 72,
+            "elapsed": 11.6,
+            "severity": 10.0,
+            "credibility": 8.9,
+            "label": "CRITICAL",
+            "emergency": true,
+            "sla_breached": false,
+            "keywords": [
+                "Live",
+                "high-tension",
+                "wire"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 144,
+            "ward_id": 4,
+            "ward_name": "Rohini",
+            "category": "Public Safety",
+            "text": "Uncovered deep manhole in Rohini. Someone could easily fall in at night.",
+            "status": "In Progress",
+            "sla_hrs": 6,
+            "elapsed": 56.4,
+            "severity": 3.8,
+            "credibility": 6.1,
+            "label": "MEDIUM",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Uncovered",
+                "deep",
+                "manhole"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 145,
+            "ward_id": 4,
+            "ward_name": "Rohini",
+            "category": "Road Damage",
+            "text": "Large structural crack developed on the flyover approach in Rohini. Needs urgent assessment.",
+            "status": "Pending",
+            "sla_hrs": 24,
+            "elapsed": 47.5,
+            "severity": 2.0,
+            "credibility": 5.4,
+            "label": "LOW",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Large",
+                "structural",
+                "crack"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 146,
+            "ward_id": 8,
+            "ward_name": "Chandni Chowk",
+            "category": "Street Light Failure",
+            "text": "Wiring exposed at the base of the street light in Chandni Chowk. Risk of electric shock.",
+            "status": "Pending",
+            "sla_hrs": 48,
+            "elapsed": 63.6,
+            "severity": 3.6,
+            "credibility": 8.9,
+            "label": "MEDIUM",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Wiring",
+                "exposed",
+                "at"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 147,
+            "ward_id": 2,
+            "ward_name": "Civil Lines",
+            "category": "Road Damage",
+            "text": "Massive pothole causing accidents near Jama Masjid in Civil Lines. Motorbike damaged tonight.",
+            "status": "Pending",
+            "sla_hrs": 48,
+            "elapsed": 75.4,
+            "severity": 5.3,
+            "credibility": 8.9,
+            "label": "MEDIUM",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Massive",
+                "pothole",
+                "causing"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 148,
+            "ward_id": 8,
+            "ward_name": "Chandni Chowk",
+            "category": "Emergency",
+            "text": "Major fire outbreak at an apartment building in Chandni Chowk near Qutub Minar. Smoke spreading rapidly.",
+            "status": "In Progress",
+            "sla_hrs": 72,
+            "elapsed": 88.3,
+            "severity": 8.9,
+            "credibility": 7.2,
+            "label": "CRITICAL",
+            "emergency": true,
+            "sla_breached": true,
+            "keywords": [
+                "Major",
+                "fire",
+                "outbreak"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 149,
+            "ward_id": 3,
+            "ward_name": "Karol Bagh",
+            "category": "Water Leakage",
+            "text": "Contaminated, foul-smelling water coming from taps in Karol Bagh. Health risk.",
+            "status": "In Progress",
+            "sla_hrs": 6,
+            "elapsed": 54.4,
+            "severity": 4.5,
+            "credibility": 5.3,
+            "label": "MEDIUM",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Contaminated,",
+                "foul-smelling",
+                "water"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        },
+        {
+            "idx": 150,
+            "ward_id": 8,
+            "ward_name": "Chandni Chowk",
+            "category": "Public Safety",
+            "text": "Abandoned building near Chandni Chowk market used for suspicious activities at night. Residents afraid.",
+            "status": "Pending",
+            "sla_hrs": 6,
+            "elapsed": 90.2,
+            "severity": 7.4,
+            "credibility": 6.4,
+            "label": "HIGH",
+            "emergency": false,
+            "sla_breached": true,
+            "keywords": [
+                "Abandoned",
+                "building",
+                "near"
+            ],
+            "features": [
+                "location mentioned"
+            ]
+        }
+    ]
+}
